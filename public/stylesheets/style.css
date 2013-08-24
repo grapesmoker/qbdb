@@ -1,0 +1,11 @@
+a {
+  color: #00B7FF;
+}
+
+body {
+	font-family: proxima-nova,"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 14px;
+	line-height: 20px;
+	color: #333333;
+	padding: 50px;
+}

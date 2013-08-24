@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    {{> header }}
+  </head>
+  <body>
+    <div class="container-fluid">
+    	<div class="row-fluid">
+    		{{> sidebar }}
+    		<div class="span10">
+    			<div class="hero-unit">
+    				<h4>Welcome to QBDB!</h4>
+    				<p>
+    					This is the new and improved version of QBDB, running off Node.js with Mongo for data storage.
+    					QBDB is also now updated with all the latest packets that can be found on the HSQB quizbowl
+    					packet database.
+    				</p>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+  </body>
+</html>

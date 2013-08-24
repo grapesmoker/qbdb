@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    {{> header }}
+  </head>
+  <body>
+    <div class="container-fluid">
+    	<div class="row-fluid">
+    		{{> sidebar }}
+    		<div class="span8">
+    			{{#if packet}}
+    				{{#if tossups}}
+	    				<div class='hero-unit'>
+	    					<h3>
+	    						Tossups for {{ packet.author }} in {{ packet.tournament.tournament }}
+	    					</h3>
+	    				</div>
+	    				<table class="table table-striped">
+	    					
+	    					{{#each tossups}}
+		    					<tr>
+		    						<td>
+		    							<p>
+		    								{{{ question }}}
+		    							</p>
+		    						</td>
+		    					</tr>
+		    					<tr>
+		    						<td>
+		    							<p>
+		    								ANSWER: {{{ answer }}}
+		    							</p>
+		    						</td>
+		    					</tr>
+	    					{{/each }}
+
+	    				</table>
+    				{{/if}}
+    				
+    				{{#if bonuses }}
+	    				<div class='hero-unit'>
+	    					<h3>
+	    						Bonuses for {{ packet.author }} in {{ packet.tournament.tournament }}
+	    					</h3>
+	    				</div>
+	    				<table class="table table-striped">
+	    					
+	    					{{#each bonus}}
+		    					<tr>
+		    						<td>
+		    							<p>
+		    								{{{ leadin }}}
+		    							</p>
+		    						</td>
+		    					</tr>
+		    					<tr>
+		    						<td>
+		    							<p>
+		    								{{ values }} {{{ parts }}}
+		    							</p>
+		    						</td>
+		    					</tr>
+		    					<tr>
+		    						<td>
+		    							<p>
+		    								ANSWER: {{{ answers }}}
+		    							</p>
+		    						</td>
+		    					</tr>
+	    					{{/each }}
+
+	    				</table>
+    				{{/if}}
+    				
+    			{{/if}}
+    		</div>
+    	</div>
+    </div>
+  </body>
+</html>

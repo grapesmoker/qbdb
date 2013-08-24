@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    {{> header }}
+  </head>
+  <body>
+    <div class="container-fluid">
+    	<div class="row-fluid">
+    		{{> sidebar }}
+    		<div class="span8">
+    			{{#if tournaments}}
+    				<table class="table table-striped">
+    					<thead>
+    						<tr>
+    							<th>Tournament name</th>
+    							<th>Year</th>
+    							<th>Number of packets</th>
+    						</tr>
+    					</thead>
+    					<tbody>
+    						{{#each tournaments}}
+    							<td><a href="/viewtour/{{ _id }}">{{ tournament }}</a></td>
+    							<td>{{ year }}</td>
+    							<td>{{ numPackets }}</td>
+    						{{/each}}
+    					</tbody>
+    				</table>
+    			{{/if}}
+    		</div>
+    	</div>
+    </div>
+  </body>
+</html>
