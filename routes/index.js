@@ -7,12 +7,13 @@ var Bonus = require('../models/bonuses').Bonus;
 
 exports.index = function(req, res){
   
-	Tournament.find({}, {year: 1}, function(err, tournaments) {
+	Tournament.distinct('year', function(err, tournaments) {
 		if (err || !tournaments) {
 			console.log(err);
 			res.render('index.html', {state: 'error', message: 'Failed to retrieve tournaments!'});
 		}
 		else {
+			console.log(tournaments);
 			res.render('index.html', {state: 'success', tournaments: tournaments});
 		}
 	});
@@ -20,12 +21,13 @@ exports.index = function(req, res){
 
 exports.alltournaments = function(req, res) {
 	
-	Tournament.find({}, function(err, tournaments) {
+	Tournament.find({}).populate('packets').exec(function(err, tournaments) {
 		if (err || !tournaments) {
 			console.log(err);
 			res.render('alltournaments.html', {state: 'error', message: 'Failed to retrieve tournaments!'});
 		}
 		else {
+			console.log(tournaments);
 			res.render('alltournaments.html', {state: 'success', tournaments: tournaments});
 		}
 	});

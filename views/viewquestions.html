@@ -25,10 +25,6 @@
 		    							<p>
 		    								{{{ question }}}
 		    							</p>
-		    						</td>
-		    					</tr>
-		    					<tr>
-		    						<td>
 		    							<p>
 		    								ANSWER: {{{ answer }}}
 		    							</p>
@@ -47,33 +43,27 @@
 	    				</div>
 	    				<table class="table table-striped">
 	    					
-	    					{{#each bonus}}
+	    					{{#each bonuses}}
 		    					<tr>
 		    						<td>
 		    							<p>
 		    								{{{ leadin }}}
 		    							</p>
-		    						</td>
-		    					</tr>
-		    					<tr>
-		    						<td>
-		    							<p>
-		    								{{ values }} {{{ parts }}}
-		    							</p>
-		    						</td>
-		    					</tr>
-		    					<tr>
-		    						<td>
-		    							<p>
-		    								ANSWER: {{{ answers }}}
-		    							</p>
+		    							{{#each parts}}
+			    					
+			    							<p>
+			    								[{{ value }}] {{{ part }}}
+			    							</p>
+			    							<p>
+			    								ANSWER: {{{ answer }}}
+			    							</p>
+
+			    						{{/each}}
 		    						</td>
 		    					</tr>
 	    					{{/each }}
-
 	    				</table>
-    				{{/if}}
-    				
+    				{{/if}}		
     			{{/if}}
     		</div>
     	</div>

@@ -9,3 +9,8 @@ body {
 	color: #333333;
 	padding: 50px;
 }
+
+req {
+	text-decoration: underline;
+	font-weight: bold;
+}

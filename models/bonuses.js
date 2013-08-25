@@ -7,9 +7,7 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var BonusSchema = new mongoose.Schema({
 	leadin: String,
-	values: [String],
-	parts: [String],
-	answers: [String],
+	parts: Array,
 	tournament: {type: ObjectId, ref: 'Tournament'},
 	packet: {type: ObjectId, ref: 'Packet'}
 },
