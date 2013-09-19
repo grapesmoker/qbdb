@@ -16,10 +16,11 @@
     "underscore": "*",
     "passport": "*",
     "passport-local": "*",
-    "socket.io": "*"
+    "socket.io": "*",
+    "consolidate": "*"
   },
   "author": {
-	  "name": "Jerry Vinokurov",
-	  "email": "grapesmoker@gmail.com"
+    "name": "Jerry Vinokurov",
+    "email": "grapesmoker@gmail.com"
   }
 }
