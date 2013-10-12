@@ -295,7 +295,7 @@ def bonuses_json(bonuses):
     
     bonuses_json = ''
     bonuses = map(lambda text: string.strip(re.sub('^\d*\.', '', text)), bonuses)
-    bonuses = map(lambda text: re.sub('\'', '\\\'', text), bonuses) 
+    #bonuses = map(lambda text: re.sub('\'', '\\\'', text), bonuses) 
     leadin_markers = [i for i in range(len(bonuses)) if not re.search('^\[\w*\]|^\(\w*\)|(?i)^(answer|asnwer):', bonuses[i])]
     for i in range(len(leadin_markers[:-1])):
         leadin = bonuses[leadin_markers[i]]
