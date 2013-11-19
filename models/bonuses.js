@@ -1,13 +1,11 @@
-/**
- * New node file
- */
-
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var BonusSchema = new mongoose.Schema({
 	leadin: String,
-	parts: Array,
+	part: Array,
+	value: Array,
+	answer: Array,
 	tournament: {type: ObjectId, ref: 'Tournament'},
 	packet: {type: ObjectId, ref: 'Packet'}
 },

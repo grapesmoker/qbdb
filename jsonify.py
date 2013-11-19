@@ -30,7 +30,6 @@ bonuses = db.bonuses
 from BeautifulSoup import BeautifulSoup, Comment
 from pprint import pprint
 
-#ansregex = '(?i)(answer|asnwer):'
 ansregex = '(?i)a..wer:'
 class InvalidPacket(Exception):
 
@@ -85,20 +84,11 @@ class Bonus:
         self.answers.append(answer)
 
     def to_json(self):
-        # return json.dumps({'leadin': self.leadin,
-        #                    'parts': self.parts,
-        #                    'answers': self.answers,
-        #                    'number': self.number,
-        #                    'values': self.values})
-
-        parts_arr = []
-        for v, p, a in zip(self.values, self.parts, self.answers):
-            parts_arr.append({'value': v, 'part': p, 'answer': a})
-        
-        
-        return json.dumps({'leadin': self.leadin,
-                           'parts': parts_arr,
-                           'number': self.number}) + '\n'
+         return json.dumps({'leadin': self.leadin,
+                            'parts': self.parts,
+                            'answers': self.answers,
+                            'number': self.number,
+                            'values': self.values}) + '\n'
 
     def is_valid(self):
 
@@ -190,7 +180,9 @@ def empty_tags_left(soup):
         return True
     
 def sanitize (html, valid_tags):
+    html = re.sub("\xa0", ' ', html)
     soup = BeautifulSoup(html)
+    # get rid of comments
     for comment in soup.findAll(
         text=lambda text: isinstance(text, Comment)):
         comment.extract()
@@ -540,11 +532,10 @@ def import_json_into_mongo(filename):
                                             'tournament': t_id})
 
             for bonus in bonuses_json:
-                parts_arr = []
-                for part in bonus['parts']:
-                    parts_arr.append({'value': part['value'], 'part': part['part'], 'answer': part['answer']})
                 bonus_id = bonuses.insert({'leadin': bonus['leadin'],
-                                           'parts': parts_arr,
+                                           'part' :  bonus['parts'],
+                                           'value' : bonus['values'],
+                                           'answer': bonus['answers'],
                                            'packet': p_id,
                                            'tournament': t_id})
     

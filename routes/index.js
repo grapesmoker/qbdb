@@ -1,12 +1,9 @@
-
 var Tournament = require('../models/tournaments').Tournament;
 var Packet = require('../models/packets').Packet;
 var Tossup = require('../models/tossups').Tossup;
 var Bonus = require('../models/bonuses').Bonus;
 
-
 exports.index = function(req, res){
-  
 	Tournament.distinct('year', function(err, tournaments) {
 		if (err || !tournaments) {
 			console.log(err);
@@ -19,8 +16,20 @@ exports.index = function(req, res){
 	});
 };
 
+exports.faq = function(req, res){
+	Tournament.distinct('year', function(err, tournaments) {
+		if (err || !tournaments) {
+			console.log(err);
+			res.render('faq.html', {state: 'error', message: 'Failed to retrieve tournaments!'});
+		}
+		else {
+			console.log(tournaments);
+			res.render('faq.html', {state: 'success', tournaments: tournaments});
+		}
+	});
+};
+
 exports.alltournaments = function(req, res) {
-	
 	Tournament.find({}).populate('packets').exec(function(err, tournaments) {
 		if (err || !tournaments) {
 			console.log(err);
@@ -34,7 +43,6 @@ exports.alltournaments = function(req, res) {
 };
 
 exports.viewtour = function(req, res) {
-	
 	Tournament.find({}, function(err, tournaments) {
 		if (err || !tournaments) {
 			console.log(err);
@@ -58,7 +66,6 @@ exports.viewtour = function(req, res) {
 };
 
 exports.viewquestions = function(req, res) {
-	
 	Tournament.find({}, function(err, tournaments) {
 		if (err || !tournaments) {
 			console.log(err);
@@ -79,7 +86,7 @@ exports.viewquestions = function(req, res) {
 							res.render('viewquestions.html', {state: 'error', message: 'Failed to retrieve tossups!'});
 						}
 						else {
-							console.log(packetId);
+							//console.log(packetId);
 							
 							Bonus.find({packet: packetId}, function(err, bonuses) {
 								if (err || !bonuses) {
@@ -87,14 +94,21 @@ exports.viewquestions = function(req, res) {
 									res.render('viewquestions.html', {state: 'error', message: 'Failed to retrieve bonuses!'});
 								}
 								else {
-									console.log(packet);
-									console.log(bonuses);
-									console.log(packetId);
-									res.render('viewquestions.html', {state: 'success', 
-										tournaments: tournaments, 
-										packet: packet,
-										tossups: tossups,
-										bonuses: bonuses});
+                  var zipmebabyonemoretime = new Array(bonuses.length);
+                  for(var i=0; i<bonuses.length; i++) {
+                      //zipmebabyonemoretime[i] = bonuses[i];
+                      zipmebabyonemoretime[i] = {leadin: bonuses[i].leadin, parts: und.zip(bonuses[i].value, bonuses[i].part, bonuses[i].answer)};
+                  }
+									//console.log(packet);
+									console.log(zipmebabyonemoretime);
+									//console.log(packetId);
+									res.render('viewquestions.html', 
+                    { state: 'success', 
+                      tournaments: tournaments, 
+                      packet: packet,
+                      tossups: tossups,
+                      bonuses: zipmebabyonemoretime
+                    });
 								}
 							});
 						}

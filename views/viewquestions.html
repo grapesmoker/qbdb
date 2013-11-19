@@ -43,22 +43,17 @@
 	    				</div>
 	    				<table class="table table-striped">
 	    					
-	    					{{#each bonuses}}
+                {{bonuses}}
+                {{#each bonuses}}
 		    					<tr>
 		    						<td>
 		    							<p>
 		    								{{{ leadin }}}
 		    							</p>
-		    							{{#each parts}}
-			    					
-			    							<p>
-			    								[{{ value }}] {{{ part }}}
-			    							</p>
-			    							<p>
-			    								ANSWER: {{{ answer }}}
-			    							</p>
-
-			    						{{/each}}
+                      {{#each parts}}
+                      <p> [{{this.[0]}}] {{{this.[1]}}}</p>
+                      <p> ANSWER: {{{this.[2]}}} </p>
+                      {{/each}}
 		    						</td>
 		    					</tr>
 	    					{{/each }}
