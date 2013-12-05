@@ -30,7 +30,7 @@ bonuses = db.bonuses
 from BeautifulSoup import BeautifulSoup, Comment
 from pprint import pprint
 
-ansregex = '(?i)a..wer:'
+ansregex = '(?i)a..?wers?:'
 class InvalidPacket(Exception):
 
     def __init__(self, *args):
@@ -288,7 +288,7 @@ def bonuses_json(bonuses):
     bonuses_json = ''
     bonuses = map(lambda text: string.strip(re.sub('^\d*\.', '', text)), bonuses)
     #bonuses = map(lambda text: re.sub('\'', '\\\'', text), bonuses) 
-    leadin_markers = [i for i in range(len(bonuses)) if not re.search('^\[\w*\]|^\(\w*\)|(?i)^(answer|asnwer):', bonuses[i])]
+    leadin_markers = [i for i in range(len(bonuses)) if not re.search('^\[\w*\]|^\(\w*\)|(?i)^(answer|asnwer|answers|anwer):', bonuses[i])]
     for i in range(len(leadin_markers[:-1])):
         leadin = bonuses[leadin_markers[i]]
         parts = []
@@ -359,7 +359,10 @@ def split_tossups_bonuses(doc_file):
     #html = sanitize(html, valid_tags).split('\n')
     html = re.compile('\n|\r\n').split(sanitize(html, valid_tags))
     html = map(lambda text: string.strip(text), html)
-    html = filter(lambda text: text != '', html)
+
+    html = filter(lambda text: text != '' and not text.startswith('TIEBREAKER'), html)
+    html = re.sub('([^\n])(ANSWER|\[\d+\])', '\\1\n\\2', '\n'.join(html)).split('\n')
+    html = map(string.strip, html)
 
     f = open(html_file, 'w')
     for line in html:
@@ -370,8 +373,8 @@ def split_tossups_bonuses(doc_file):
 
 def handle_html(html_file):
     f = open(html_file, 'r')
-    html = map(string.strip, f.readlines())
-    
+    print html_file
+    html = f.readlines()
     first_tossup = find_first_tossup(html)
     first_bonus = find_first_bonus(html)
 
@@ -540,7 +543,8 @@ def import_json_into_mongo(filename):
                                            'tournament': t_id})
     
 if __name__ == '__main__':
-
+    reload(sys)
+    sys.setdefaultencoding('utf-8')
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--file', dest='file')
     parser.add_argument('-d', '--dir', dest='dir')
