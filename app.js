@@ -40,6 +40,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/faq', routes.faq);
 app.get('/alltournaments', routes.alltournaments);
+app.delete('/alltournaments/:id', routes.deletetour);
 app.get('/viewtour/:id', routes.viewtour);
 app.get('/viewquestions/:id', routes.viewquestions);
 

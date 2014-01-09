@@ -118,3 +118,19 @@ exports.viewquestions = function(req, res) {
 		}
 	});
 }
+
+exports.deletetour = function(req, res) {
+  var tourId = req.params.id;
+  Tournament.remove({_id: tourId}, function(terr) {
+    Packet.remove({tournament: tourId}, function(perr) {
+      Tossup.remove({tournament: tourId}, function(tuperr) {
+        Bonus.remove({tournament: tourId}, function(bperr) {
+          if(terr || perr || tuperr || bperr) {
+            console.log(terr, perr, tuperr, bperr);
+            res.redirect('/alltournaments.html');
+          }
+        });
+      });
+    });
+  });
+}
