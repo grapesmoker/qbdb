@@ -4,7 +4,7 @@ var Tossup = require('../models/tossups').Tossup;
 var Bonus = require('../models/bonuses').Bonus;
 
 exports.index = function(req, res){
-	Tournament.distinct('year', function(err, tournaments) {
+	Tournament.find({}, function(err, tournaments) {
 		if (err || !tournaments) {
 			console.log(err);
 			res.render('index.html', {state: 'error', message: 'Failed to retrieve tournaments!'});
@@ -17,7 +17,7 @@ exports.index = function(req, res){
 };
 
 exports.faq = function(req, res){
-	Tournament.distinct('year', function(err, tournaments) {
+	Tournament.find({}, function(err, tournaments) {
 		if (err || !tournaments) {
 			console.log(err);
 			res.render('faq.html', {state: 'error', message: 'Failed to retrieve tournaments!'});
