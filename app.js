@@ -1,27 +1,16 @@
-/**
- * Module dependencies.
- */
-
 var express = require('express')
   , routes = require('./routes')
   , http = require('http')
   , path = require('path')
   , mongoose = require('mongoose')
-  , cons = require('consolidate')
   , fs = require('fs');
 
 var app = express();
 
 mongoose.connect('mongodb://localhost/qbdb');
 
-bcrypt = require('bcrypt');
-und = require('underscore');
-moment = require('moment');
-hb = require('handlebars');
-
 // all environments
-app.engine('html', cons.handlebars);
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 8080);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
 app.use(express.favicon());
@@ -49,6 +38,3 @@ http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
-hb.registerPartial('header', fs.readFileSync('./views/header.html', 'utf8'));
-hb.registerPartial('sidebar', fs.readFileSync('./views/sidebar.html', 'utf8'))
-hb.registerPartial('progress', fs.readFileSync('./views/progress.html', 'utf8'))

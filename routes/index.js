@@ -1,3 +1,6 @@
+var path = require('path'),
+    views = path.join(__dirname, '..', 'views');
+
 var Tournament = require('../models/tournaments').Tournament;
 var Packet = require('../models/packets').Packet;
 var Tossup = require('../models/tossups').Tossup;
@@ -28,7 +31,10 @@ var wrapTournament = function(filename) {
   }
 }
 
-exports.index = wrapTournament('index.html');
+exports.index = function(req, res) {
+  res.sendfile(path.join(views, 'index.html'));
+}
+
 exports.faq = wrapTournament('faq.html');
 exports.alltournaments = wrapTournament('alltournaments.html');
 
