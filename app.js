@@ -25,6 +25,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+//routes
 app.get('/', routes.index);
 app.get('/partials/:name', routes.partials);
 
