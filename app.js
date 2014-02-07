@@ -26,13 +26,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/faq', routes.faq);
-app.get('/alltournaments', routes.alltournaments);
-app.delete('/alltournaments/:id', routes.deletetour);
-app.get('/viewtour/:id', routes.viewtour);
-app.get('/viewquestions/:id', routes.viewquestions);
-app.put('/update', routes.update);
-app.put('/report', routes.report);
+app.get('/partials/:name', routes.partials);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

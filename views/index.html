@@ -1,31 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html ng-app='qbdb'>
   <head>
+    <meta charset='utf-8' />
+    <base href='/'>
     <title>QBDB</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
-    <link rel='stylesheet' href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
+
+    <link rel='stylesheet' href='//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css' />
+    <link rel='stylesheet' href='//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <header>
-      <nav class='navbar navbar-default'>
+      <nav class='navbar navbar-default' role='navigation'>
         <div class='container'>
           <div class='navbar-header'>
             <a href='/' class='navbar-brand'>QBDB</a>
           </div>
 
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="#about"><i class="fa fa-search"></i> Search</a></li>
-            <li><a href="#contact"><i class="fa fa-book"></i> Browse</a></li>
+          <ul class='nav navbar-nav navbar-right'>
+            <li><a href='/'><i class='fa fa-home'></i> Home</a></li>
+            <li><a href='/search/'><i class='fa fa-search'></i> Search</a></li>
+            <li><a href='/browse/'><i class='fa fa-book'></i> Browse</a></li>
+            <li><a href='/faq/'><i class='fa fa-question'></i> FAQ</a></li>
           </ul>
         </div>
       </nav>
     </header>
     <div id='main'>
-    
+      <div ng-view></div>
     </div>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+    <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js'></script>
+    <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js'></script>
+    <script src='/js/app.js'></script>
   </body>
 </html>
