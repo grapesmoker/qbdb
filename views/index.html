@@ -2,25 +2,30 @@
 <html>
   <head>
     <title>QBDB</title>
-    <link rel='stylesheet' href='/stylesheets/bootstrap.css' />
-    <link rel='stylesheet' href='/stylesheets/font-awesome/css/font-awesome.css' />
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+    <link rel='stylesheet' href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <div class="container">
-    	<div class="row">
-    		<div class="col-md-8">
-    			<div class="jumbotron">
-    				<h4>Welcome to QBDB!</h4>
-    				<p>
-    					This is the new and improved version of QBDB, running off Node.js with Mongo for data storage.
-    					QBDB is also now updated with all the latest packets that can be found on the HSQB quizbowl
-    					packet database.
-    				</p>
-    			</div>
-    		</div>
-    	</div>
+    <header>
+      <nav class='navbar navbar-default'>
+        <div class='container'>
+          <div class='navbar-header'>
+            <a href='/' class='navbar-brand'>QBDB</a>
+          </div>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="#about"><i class="fa fa-search"></i> Search</a></li>
+            <li><a href="#contact"><i class="fa fa-book"></i> Browse</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <div id='main'>
+    
     </div>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
   </body>
 </html>
