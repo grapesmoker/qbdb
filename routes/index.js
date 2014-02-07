@@ -2,6 +2,7 @@ var Tournament = require('../models/tournaments').Tournament;
 var Packet = require('../models/packets').Packet;
 var Tossup = require('../models/tossups').Tossup;
 var Bonus = require('../models/bonuses').Bonus;
+var und = require('underscore');
 
 var wrapTournament = function(filename) {
   var count, total;

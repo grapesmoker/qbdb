@@ -1,23 +1,14 @@
-/**
- * Module dependencies.
- */
-
 var express = require('express')
   , routes = require('./routes')
   , http = require('http')
   , path = require('path')
   , mongoose = require('mongoose')
   , cons = require('consolidate')
-  , fs = require('fs');
+  , fs = require('fs')
+  , hb = require('handlebars');
 
 var app = express();
-
 mongoose.connect('mongodb://localhost/qbdb');
-
-bcrypt = require('bcrypt');
-und = require('underscore');
-moment = require('moment');
-hb = require('handlebars');
 
 // all environments
 app.engine('html', cons.handlebars);
