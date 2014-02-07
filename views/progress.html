@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-9">
+    <div class="progress">
+      {{#if progress}}
+      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress}}%">
+        <span class="sr-only">{{progress}}% Complete</span>
+      </div>
+      {{else}}
+      <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+        <span class="sr-only">50% Complete</span>
+      </div>
+      {{/if}}
+    </div>
+  </div>
+  <div class="col-md-3">
+    {{count}} / {{total}} - {{progress}}% Complete
+  </div>
+</div>

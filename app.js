@@ -42,6 +42,8 @@ app.get('/alltournaments', routes.alltournaments);
 app.delete('/alltournaments/:id', routes.deletetour);
 app.get('/viewtour/:id', routes.viewtour);
 app.get('/viewquestions/:id', routes.viewquestions);
+app.put('/update', routes.update);
+app.put('/report', routes.report);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
@@ -49,3 +51,4 @@ http.createServer(app).listen(app.get('port'), function(){
 
 hb.registerPartial('header', fs.readFileSync('./views/header.html', 'utf8'));
 hb.registerPartial('sidebar', fs.readFileSync('./views/sidebar.html', 'utf8'))
+hb.registerPartial('progress', fs.readFileSync('./views/progress.html', 'utf8'))

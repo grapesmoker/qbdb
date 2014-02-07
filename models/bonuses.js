@@ -6,6 +6,8 @@ var BonusSchema = new mongoose.Schema({
 	part: Array,
 	value: Array,
 	answer: Array,
+	subject: String,
+	flagged: {type: Boolean, default: false},
 	tournament: {type: ObjectId, ref: 'Tournament'},
 	packet: {type: ObjectId, ref: 'Packet'}
 },
