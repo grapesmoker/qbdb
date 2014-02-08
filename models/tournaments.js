@@ -6,7 +6,6 @@ var TournamentSchema = new mongoose.Schema({
   year: String,
   numPackets: Number,
   powers: Boolean,
-  packets: [{type: ObjectId, ref: 'Packet'}]
 });
 
 var Tournament = mongoose.model('Tournament', TournamentSchema);

@@ -1,0 +1,75 @@
+<div>
+  <div class="jumbotron">
+    <h3>
+      Tossups for {{ packet.author }} in {{ packet.tournament.year }} {{ packet.tournament.tournament }}
+    </h3>
+  </div>
+  <table class="table table-striped" ng-each="tossup in tossups">
+    <tr>
+      <td>{{tossup.subject}}</td>
+      <td>
+        Change to
+        <select ng-model="tossup.subject">
+          <optgroup label="{{header}}">
+            <option></option>
+          </optgroup>
+        </select>
+      </td>
+      <td>
+        <button class="{{#if flagged}}btn-success{{/if}} btn btn-default" onclick="report('{{_id}}', 'tossup')">Report</button>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <p>
+        {{{ question }}}
+        </p>
+        <p>
+        ANSWER: {{{ answer }}}
+        </p>
+      </td>
+    </tr>
+  </table>
+
+  {{#if bonuses }}
+  <div class="jumbotron">
+    <h3>
+      Bonuses for {{ packet.author }} in {{ packet.tournament.year }} {{ packet.tournament.tournament }}
+    </h3>
+  </div>
+  <table class="table table-striped">
+    {{#each bonuses}}
+    <tr>
+      <td id="{{_id}}subject">{{subject}}</td>
+      <td>
+        Change to
+        <select id="{{_id}}select">
+          {{#each ../subjects}}
+          <optgroup label="{{header}}">
+            {{#each list}}
+            <option>{{this}}</option>
+            {{/each }}
+          </optgroup>
+          {{/each }}
+        </select>
+      </td>
+      <td>
+        <button id="{{_id}}button" class="{{#if flagged}}btn-success{{/if}} btn btn-default" onclick="report('{{_id}}', 'bonus')">Report</button>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <p>
+        {{{ leadin }}}
+        </p>
+        {{#each parts}}
+        <p> [{{this.[0]}}] {{{this.[1]}}}</p>
+        <p> ANSWER: {{{this.[2]}}} </p>
+        {{/each}}
+      </td>
+      <td></td>
+    </tr>
+    {{/each }}
+  </table>
+  Thanks for categorizing {{packet.author}}! <a href="/viewtour/{{packet.tournament._id}}">Back to {{packet.tournament.year}} {{packet.tournament.tournament}} packets</a>
+</div>
