@@ -4,72 +4,63 @@
       Tossups for {{ packet.author }} in {{ packet.tournament.year }} {{ packet.tournament.tournament }}
     </h3>
   </div>
-  <table class="table table-striped" ng-each="tossup in tossups">
-    <tr>
+  <table class="table table-striped">
+    <tr ng-repeat-start="tossup in tossups">
       <td>{{tossup.subject}}</td>
       <td>
         Change to
-        <select ng-model="tossup.subject">
-          <optgroup label="{{header}}">
-            <option></option>
+        <select ng-model="tossup.subject" ng-change="tossup.$save()">
+          <optgroup label="{{subj.header}}" ng-repeat="subj in subjects">
+             <option ng-repeat="s in subj.list">{{s}}</option>
           </optgroup>
         </select>
       </td>
       <td>
-        <button class="{{#if flagged}}btn-success{{/if}} btn btn-default" onclick="report('{{_id}}', 'tossup')">Report</button>
+        Reported: 
+        <input type="checkbox" ng-model='tossup.flagged' ng-change='tossup.$save()'/>
       </td>
     </tr>
-    <tr>
+    <tr ng-repeat-end>
       <td colspan="3">
-        <p>
-        {{{ question }}}
+        <p ng-bind-html="tossup.question">
         </p>
-        <p>
-        ANSWER: {{{ answer }}}
+        <p ng-bind-html="tossup.answer | answer">
+          ANSWER: 
         </p>
       </td>
     </tr>
   </table>
-
-  {{#if bonuses }}
   <div class="jumbotron">
     <h3>
       Bonuses for {{ packet.author }} in {{ packet.tournament.year }} {{ packet.tournament.tournament }}
     </h3>
   </div>
   <table class="table table-striped">
-    {{#each bonuses}}
-    <tr>
-      <td id="{{_id}}subject">{{subject}}</td>
+    <tr ng-repeat-start="bonus in bonuses">
+      <td>{{bonus.subject}}</td>
       <td>
         Change to
-        <select id="{{_id}}select">
-          {{#each ../subjects}}
-          <optgroup label="{{header}}">
-            {{#each list}}
-            <option>{{this}}</option>
-            {{/each }}
+        <select ng-model="bonus.subject" ng-change="bonus.$save()">
+          <optgroup label="{{subj.header}}" ng-repeat="subj in subjects">
+             <option ng-repeat="s in subj.list">{{s}}</option>
           </optgroup>
-          {{/each }}
         </select>
       </td>
       <td>
-        <button id="{{_id}}button" class="{{#if flagged}}btn-success{{/if}} btn btn-default" onclick="report('{{_id}}', 'bonus')">Report</button>
+        Reported: 
+        <input type="checkbox" ng-model='bonus.flagged' ng-change='bonus.$save()'/>
       </td>
     </tr>
-    <tr>
+    <tr ng-repeat-end>
       <td colspan="3">
-        <p>
-        {{{ leadin }}}
+        <p ng-bind-html="bonus.leadin">
         </p>
-        {{#each parts}}
-        <p> [{{this.[0]}}] {{{this.[1]}}}</p>
-        <p> ANSWER: {{{this.[2]}}} </p>
-        {{/each}}
+        <p ng-repeat-start="part in bonus.part">
+        [{{bonus.value[$index]}}] <span ng-bind-html="part"></span>
+        </p>
+        <p ng-repeat-end ng-bind-html="bonus.answer[$index] | answer"> </p>
       </td>
-      <td></td>
     </tr>
-    {{/each }}
   </table>
   Thanks for categorizing {{packet.author}}! <a href="/viewtour/{{packet.tournament._id}}">Back to {{packet.tournament.year}} {{packet.tournament.tournament}} packets</a>
 </div>

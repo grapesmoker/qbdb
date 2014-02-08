@@ -1,6 +1,6 @@
-var qbdb = angular.module('qbdb', ['ngRoute', 'qbdb.controllers', 'qbdb.services']);
+var qbdb = angular.module('qbdb', ['ngRoute', 'ngSanitize', 'qbdb.controllers', 'qbdb.services', 'qbdb.filters']);
 
-qbdb.config(function($routeProvider, $locationProvider) {
+qbdb.config(function($routeProvider, $locationProvider, $sceProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'partials/welcome.html'
@@ -22,4 +22,5 @@ qbdb.config(function($routeProvider, $locationProvider) {
     })
 
   $locationProvider.html5Mode(true);
+  $sceProvider.enabled(false);
 });
