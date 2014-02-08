@@ -2,7 +2,8 @@ var Packet = require('../models/packets').Packet;
 
 exports.createRoutes = function(root, app) {
   app.get(root + '/:id', function(req, res) {
-    Packet.findById(req.params.id, function(err, packet) {
+    var packetId = req.params.id;
+    Packet.findById(packetId).populate('tournament').exec(function(err, packet) {
       if(err || !packet) res.send(500, err);
       res.send(packet);
     });

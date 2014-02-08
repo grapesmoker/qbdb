@@ -6,5 +6,4 @@ angular.module('qbdb.controllers', ['qbdb.services']).
     $scope.packets = packet.withTournament({tid: $routeParams.tid});
   }).
   controller('viewQuestionsCtrl', function($scope) {
-    $scope.
   });
