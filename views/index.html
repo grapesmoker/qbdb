@@ -1,26 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html ng-app='qbdb'>
   <head>
-    <title>{{ title }}</title>
+    <meta charset='utf-8' />
+    <base href='/'>
+    <title>QBDB</title>
+
+    <link rel='stylesheet' href='//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css' />
+    <link rel='stylesheet' href='//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    {{> header }}
   </head>
   <body>
-    <div class="container">
-      {{> progress }}
-    	<div class="row">
-    		{{> sidebar }}
-    		<div class="col-md-8">
-    			<div class="jumbotron">
-    				<h4>Welcome to QBDB!</h4>
-    				<p>
-    					This is the new and improved version of QBDB, running off Node.js with Mongo for data storage.
-    					QBDB is also now updated with all the latest packets that can be found on the HSQB quizbowl
-    					packet database.
-    				</p>
-    			</div>
-    		</div>
-    	</div>
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-2">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="/"><i class="fa fa-home"></i> Home</a></li>
+                <li><a href="/alltournaments"><i class="fa fa-book"></i> All Tournaments</a></li>
+                <li><a href="/faq"><i class="fa fa-question"></i> FAQ</a></li>
+            </ul>
+        </div>
+        <div id='main' class="col-md-10">
+          <div ng-view></div>
+        </div>
+      </div>
     </div>
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+    <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js'></script>
+    <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.js'></script>
+    <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-resource.js'></script>
+    <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-sanitize.js'></script>
+    <script src='/js/app.js'></script>
+    <script src='/js/controllers.js'></script>
+    <script src='/js/services.js'></script>
+    <script src='/js/filters.js'></script>
   </body>
 </html>

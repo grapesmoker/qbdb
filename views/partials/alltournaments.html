@@ -1,0 +1,16 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Tournament name</th>
+      <th>Year</th>
+      <th>Number of packets</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="tourn in tournaments">
+      <td><a href="/viewtour/{{ tourn._id }}">{{ tourn.tournament }}</a></td>
+      <td>{{ tourn.year }}</td>
+      <td>{{ tourn.numPackets }}</td>
+    </tr>
+  </tbody>
+</table>

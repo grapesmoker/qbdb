@@ -1,0 +1,13 @@
+<div class='hero-unit'>
+  <h3>
+    Packets for {{ tournament.year }} {{ tournament.tournament }}
+  </h3>
+</div>
+<ul class="fa-ul">
+  <li ng-repeat="pack in packets">
+    <a href="/viewquestions/{{ pack._id }}">
+      <i class="fa fa-li fa-angle-double-right"></i>
+      {{ pack.author }}
+    </a>
+  </li>
+</ul>
