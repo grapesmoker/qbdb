@@ -10,24 +10,19 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <header>
-      <nav class='navbar navbar-default' role='navigation'>
-        <div class='container'>
-          <div class='navbar-header'>
-            <a href='/' class='navbar-brand'>QBDB</a>
-          </div>
-
-          <ul class='nav navbar-nav navbar-right'>
-            <li><a href='/'><i class='fa fa-home'></i> Home</a></li>
-            <li><a href='/search/'><i class='fa fa-search'></i> Search</a></li>
-            <li><a href='/alltournaments'><i class='fa fa-book'></i> Browse</a></li>
-            <li><a href='/faq/'><i class='fa fa-question'></i> FAQ</a></li>
-          </ul>
+    <div class='container'>
+      <div class='row'>
+        <div class="col-md-2">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="/"><i class="fa fa-home"></i> Home</a></li>
+                <li><a href="/alltournaments"><i class="fa fa-book"></i> All Tournaments</a></li>
+                <li><a href="/faq"><i class="fa fa-question"></i> FAQ</a></li>
+            </ul>
         </div>
-      </nav>
-    </header>
-    <div id='main'>
-      <div ng-view></div>
+        <div id='main' class="col-md-10">
+          <div ng-view></div>
+        </div>
+      </div>
     </div>
     <script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
     <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js'></script>
