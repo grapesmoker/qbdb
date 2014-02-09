@@ -4,6 +4,7 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 var TournamentSchema = new mongoose.Schema({
   tournament: String,
   year: String,
+  diff: Number,
   numPackets: Number,
   power: Boolean,
 });
