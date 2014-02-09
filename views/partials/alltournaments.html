@@ -1,14 +1,25 @@
-Sort by: <select ng-model="predicate">
-  <option value='tournament'>Name</option>
-  <option value='year'>Year</option>
-  <option value='numPackets'>Number of Packets</option>
-  <option value='diff'>Difficulty</option>
-  <option value='power'>Powers</option>
-</select>
+<form class='form-inline'>
+  <label class='col-md-4'>
+    Filter: 
+    <input type='search' class='form-control input-sm' ng-model="search.tournament" placeholder='Enter tournament name'/>
+  </label>
+  <label class='col-md-4'>
+    Sort by: 
+    <br />
+    <select ng-model="predicate">
+      <option value='tournament'>Tournament Name</option>
+      <option value='year'>Year</option>
+      <option value='numPackets'>No. of Packets</option>
+      <option value='diff'>Difficulty</option>
+      <option value='power'>Powers</option>
+    </select>
+  </label>
+</form>
+
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Tournament name</th>
+      <th>Tournament Name</th>
       <th>Year</th>
       <th>No. of Packets</th>
       <th>Difficulty</th>
@@ -16,7 +27,7 @@ Sort by: <select ng-model="predicate">
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="tourn in tournaments | orderBy:predicate">
+    <tr ng-repeat="tourn in tournaments | filter:search | orderBy:predicate">
       <td><a href="/viewtour/{{ tourn._id }}">{{ tourn.tournament }}</a></td>
       <td>{{ tourn.year }}</td>
       <td>{{ tourn.numPackets }}</td>
