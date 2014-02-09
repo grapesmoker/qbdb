@@ -66,6 +66,16 @@ var subjects = [
 ];
 
 angular.module('qbdb.controllers', ['ngSanitize', 'qbdb.services']).
+controller('progressCtrl', function($scope, $q, tossup, bonus) {
+  $scope.dyn= 50;
+  var all = $q.all([tossup.count().$promise, bonus.count().$promise, 
+    tossup.count({subject: 'Undefined', flagged: false}).$promise, bonus.count({subject: 'Undefined', flagged: false}).$promise])
+    all.then(function(result) {
+      var max = result[0].count + result[1].count;
+      var value = max - (result[2].count + result[3].count);
+      $scope.dyn= 100* (value / max);
+    });
+}).
 controller('allTournamentsCtrl', function($scope, tournament) {
   $scope.tournaments = tournament.query();
 }).

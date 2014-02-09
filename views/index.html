@@ -11,6 +11,13 @@
   </head>
   <body>
     <div class='container'>
+      <div class='row' ng-controller="progressCtrl">
+        <div class='col-md-11'>
+          <progressbar value="dyn">
+          </progressbar>
+        </div>
+        <span class='col-md-1'>{{dyn | number:2}}%</span>
+      </div>
       <div class='row'>
         <div class="col-md-2">
             <ul class="nav nav-pills nav-stacked">

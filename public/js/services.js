@@ -19,6 +19,10 @@ angular.module('qbdb.services', ['ngResource']).
         method: 'GET',
         url: '/api/tossup/packet/:pid',
         isArray: true
+      }, 
+      'count': {
+        method: 'GET',
+        url: '/api/tossup/count',
       }
     });
     return Tossup;
@@ -29,6 +33,10 @@ angular.module('qbdb.services', ['ngResource']).
         method: 'GET',
         url: '/api/bonus/packet/:pid',
         isArray: true
+      },
+      'count': {
+        method: 'GET',
+        url: '/api/bonus/count'
       }
     });
     return Bonus;

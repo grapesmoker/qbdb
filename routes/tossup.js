@@ -28,6 +28,13 @@ exports.createRoutes = function(root, app) {
     });
   });
 
+  app.get(root + '/count', function(req, res) {
+    Tossup.count(req.query, function(err, count) {
+      if(err) res.send(500, err);
+      res.json({count: count});
+    });
+  });
+
   app.post(root, function(req, res) {
     var tossupId = req.body._id;
     delete req.body._id;

@@ -27,7 +27,13 @@ exports.createRoutes = function(root, app) {
       res.send(bonuses);
     });
   });
-
+  
+  app.get(root + '/count', function(req, res) {
+    Bonus.count(req.query, function(err, count) {
+      if(err) res.send(500, err);
+      res.json({count: count});
+    });
+  });
   app.post(root, function(req, res) {
     var bonusId = req.body._id;
     delete req.body._id;
