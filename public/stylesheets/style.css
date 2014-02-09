@@ -10,3 +10,8 @@ req {
 	text-decoration: underline;
 	font-weight: bold;
 }
+
+.nav, .pagination, .carousel, .panel-title a { 
+  cursor: pointer;
+}
+

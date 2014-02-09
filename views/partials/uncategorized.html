@@ -1,17 +1,16 @@
 <div>
   <div class="jumbotron">
-    <h3>
-      Tossups for {{ packet.author }} in {{ packet.tournament.year }} {{ packet.tournament.tournament }}
-    </h3>
+    <h3>Uncategorized and unflagged tossups</h3>
   </div>
-  <table class="table table-striped">
+
+  <table class='table table-striped'>
     <tr ng-repeat-start="tossup in tossups">
       <td>{{tossup.subject}}</td>
       <td>
         Change to
         <select ng-model="tossup.subject" ng-change="tossup.$save()">
           <optgroup label="{{subj.header}}" ng-repeat="subj in subjects">
-             <option ng-repeat="s in subj.list">{{s}}</option>
+            <option ng-repeat="s in subj.list">{{s}}</option>
           </optgroup>
         </select>
       </td>
@@ -28,15 +27,13 @@
         <p ng-bind-html="tossup.question">
         </p>
         <p ng-bind-html="tossup.answer | answer">
-          ANSWER: 
+        ANSWER: 
         </p>
       </td>
     </tr>
   </table>
   <div class="jumbotron">
-    <h3>
-      Bonuses for {{ packet.author }} in {{ packet.tournament.year }} {{ packet.tournament.tournament }}
-    </h3>
+    <h3>Uncategorized and unflagged bonuses</h3>
   </div>
   <table class="table table-striped">
     <tr ng-repeat-start="bonus in bonuses">
@@ -65,5 +62,4 @@
       </td>
     </tr>
   </table>
-  Thanks for categorizing {{packet.author}}! <a href="/viewtour/{{packet.tournament._id}}">Back to {{packet.tournament.year}} {{packet.tournament.tournament}} packets</a>
-</div>
+ </div>

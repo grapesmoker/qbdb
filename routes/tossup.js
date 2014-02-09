@@ -3,7 +3,11 @@ var Tossup = require('../models/tossups').Tossup;
 exports.createRoutes = function(root, app) {
   app.get(root, function(req, res) {
     if(!req.query.id) {
-      Tossup.find(function(err, tossups) {
+      var limit = req.query.limit || 50;
+      var skip = req.query.skip || 0;
+      delete req.query.limit;
+      delete req.query.skip;
+      Tossup.find(req.query, null, {limit: limit, skip: skip}, function(err, tossups) {
         if(err) res.send(500, err);
         res.send(tossups);
       });

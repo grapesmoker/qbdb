@@ -9,7 +9,7 @@ var app = express();
 mongoose.connect('mongodb://localhost/qbdb');
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 8080);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
 app.use(express.favicon());
