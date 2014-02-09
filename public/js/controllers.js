@@ -78,6 +78,7 @@ controller('progressCtrl', function($scope, $q, tossup, bonus) {
 }).
 controller('allTournamentsCtrl', function($scope, tournament) {
   $scope.tournaments = tournament.query();
+  $scope.predicate = 'year';
 }).
 controller('viewTournamentCtrl', function($scope, $routeParams, tournament, packet) {
   $scope.tournament = tournament.get({id: $routeParams.tid});

@@ -1,3 +1,10 @@
+Sort by: <select ng-model="predicate">
+  <option value='tournament'>Name</option>
+  <option value='year'>Year</option>
+  <option value='numPackets'>Number of Packets</option>
+  <option value='diff'>Difficulty</option>
+  <option value='power'>Powers</option>
+</select>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -9,7 +16,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="tourn in tournaments">
+    <tr ng-repeat="tourn in tournaments | orderBy:predicate">
       <td><a href="/viewtour/{{ tourn._id }}">{{ tourn.tournament }}</a></td>
       <td>{{ tourn.year }}</td>
       <td>{{ tourn.numPackets }}</td>
