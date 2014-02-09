@@ -22,5 +22,15 @@ exports.createRoutes = function(root, app) {
       res.send(tournament);
     });
   });
+
+  app.post(root, function(req, res) {
+    var tournamentId = req.body._id;
+    delete req.body._id;
+    Tournament.findByIdAndUpdate(tournamentId, req.body, function(err, tournament) {
+      if(err) res.send(500, err);
+      res.send(tournament);
+    });
+  });
+
 }
 

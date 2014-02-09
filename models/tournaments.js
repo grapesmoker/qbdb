@@ -5,7 +5,7 @@ var TournamentSchema = new mongoose.Schema({
   tournament: String,
   year: String,
   numPackets: Number,
-  powers: Boolean,
+  power: Boolean,
 });
 
 var Tournament = mongoose.model('Tournament', TournamentSchema);

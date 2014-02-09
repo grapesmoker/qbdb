@@ -3,7 +3,8 @@
     <tr>
       <th>Tournament name</th>
       <th>Year</th>
-      <th>Number of packets</th>
+      <th>Number of Packets</th>
+      <th>Power Marked</th>
     </tr>
   </thead>
   <tbody>
@@ -11,6 +12,9 @@
       <td><a href="/viewtour/{{ tourn._id }}">{{ tourn.tournament }}</a></td>
       <td>{{ tourn.year }}</td>
       <td>{{ tourn.numPackets }}</td>
+      <td>
+        <input type='checkbox' ng-model="tourn.power" disabled/>
+      </td>
     </tr>
   </tbody>
 </table>
