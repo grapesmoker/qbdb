@@ -94,4 +94,38 @@ controller('uncategorizedCtrl', function($scope, tossup, bonus) {
   $scope.tossups = tossup.query({subject: 'Undefined', flagged: false});
   $scope.bonuses = bonus.query({subject: 'Undefined', flagged: false});
   $scope.subjects = subjects;
+}).
+controller('makepacketCtrl', function($scope, tossup, bonus) {
+  $scope.distribution = {
+    'American History': 1,
+    'European History': 2,
+    'World History': 1,
+    'Ancient History': 1,
+
+    'American Literature': 1,
+    'British Literature': 1,
+    'European Literature': 2,
+    'World Literature': 1,
+
+    'Biology': 1,
+    'Chemistry': 1,
+    'Physics': 1,
+    'Mathematics': 1,
+    'Astronomy': 1,
+
+    'Religion': 1,
+    'Mythology': 1,
+    'Philosophy': 1,
+
+    'Classical Music': 1,
+    'Paintings': 1,
+    'Other Art': 1,
+
+    'Psychology': 1,
+    'Geography': 1,
+    'TRASH': 1,
+  }
+  $scope.tossups = tossup.makePacket($scope.distribution);
+  $scope.bonuses = bonus.makePacket($scope.distribution);
+  $scope.subjects = subjects;
 });

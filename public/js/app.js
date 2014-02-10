@@ -23,6 +23,10 @@ qbdb.config(function($routeProvider, $locationProvider, $sceProvider) {
     .when('/uncategorized', {
       templateUrl: 'partials/uncategorized.html',
       controller: 'uncategorizedCtrl'
+    })
+    .when('/makepacket', {
+      templateUrl: 'partials/makepacket.html',
+      controller: 'makepacketCtrl'
     });
 
   $locationProvider.html5Mode(true);
