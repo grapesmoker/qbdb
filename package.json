@@ -7,9 +7,13 @@
   },
   "dependencies": {
     "express": "*",
-    "mongoose": "*",
+    "sequelize": "*",
     "lodash": "*",
-    "async": "~0.2.10"
+    "async": "~0.2.10",
+    "config": "~0.4.35",
+    "yaml": "~0.2.3",
+    "pg": "~2.11.1",
+    "sequelize-postgres": "~2.0.0-beta.2"
   },
   "author": {
     "name": "Arnav Sastry",
