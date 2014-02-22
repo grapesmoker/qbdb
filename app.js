@@ -3,12 +3,13 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , fs = require('fs')
-  , db = require('./models');
+  , db = require('./models')
+  , rest = require('epilogue');
 
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 8080);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
 app.use(express.favicon());
@@ -17,14 +18,21 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
-
+rest.initialize({app: app});
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
 //routes
-routes.createRoutes(app);
+var tournaments = rest.resource({
+  model: db.Tournament,
+  endpoints: ['/api/tournament', '/api/tournament/:id']
+});
+app.get('/', routes.index);
+app.get('/partials/:name', routes.partial);
+routes.tournamentRoutes(tournaments);
+app.get('*', routes.index);
 
 db.sequelize.sync().complete(function(err) {
   if(err) throw err;
