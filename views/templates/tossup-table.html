@@ -4,7 +4,7 @@
     <td>
       Change to
       <!--
-      <select ng-model="tossup.subject" ng-change="tossup.$save()">
+      <select ng-model="tossup.subject" ng-change="tossup.update()">
         <optgroup label="{{subj.header}}" ng-repeat="subj in subjects">
           <option ng-repeat="s in subj.list">{{s}}</option>
         </optgroup>

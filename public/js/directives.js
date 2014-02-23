@@ -5,6 +5,15 @@ directive('tossupTable', function() {
     scope: {
       tossups: '='
     },
-    templateUrl: '/templates/tossup.html'
+    templateUrl: '/templates/tossup-table.html'
   }
-});
+}).
+directive('bonusTable', function() {
+  return {
+    restrict: 'EA',
+    scope: {
+      bonuses: '='
+    },
+    templateUrl: '/templates/bonus-table.html'
+  }
+})

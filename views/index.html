@@ -11,19 +11,11 @@
   </head>
   <body>
     <div class='container'>
-      <div class='row' ng-controller="progressCtrl">
-        <div class='col-md-11'>
-          <progressbar value="dyn" class="progress-striped active">
-          </progressbar>
-        </div>
-        <span class='col-md-1'>{{dyn | number:2}}%</span>
-      </div>
       <div class='row'>
         <div class="col-md-2">
             <ul class="nav nav-pills nav-stacked">
                 <li class="active"><a href="/"><i class="fa fa-home"></i> Home</a></li>
                 <li><a href="/alltournaments"><i class="fa fa-book"></i> All Tournaments</a></li>
-                <li><a href="/uncategorized"><i class="fa fa-exclamation"></i> Uncategorized Questions</a></li>
                 <li><a href="/makepacket"><i class="fa fa-comments"></i> Random ACF Packet</a></li>
                 <li><a href="/faq"><i class="fa fa-question"></i> FAQ</a></li>
             </ul>
