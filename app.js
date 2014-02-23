@@ -9,7 +9,7 @@ var express = require('express')
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
 app.use(express.favicon());
@@ -29,9 +29,14 @@ var tournaments = rest.resource({
   model: db.Tournament,
   endpoints: ['/api/tournament', '/api/tournament/:id']
 });
+var packets = rest.resource({
+  model: db.Packet,
+  endpoints: ['/api/packet', '/api/packet/:id']
+});
 app.get('/', routes.index);
 app.get('/partials/:name', routes.partial);
 routes.tournamentRoutes(tournaments);
+routes.packetRoutes(packets);
 app.get('*', routes.index);
 
 db.sequelize.sync().complete(function(err) {

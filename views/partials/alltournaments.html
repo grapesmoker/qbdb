@@ -1,16 +1,15 @@
 <form class='form-inline'>
   <label class='col-md-4'>
     Filter: 
-    <input type='search' class='form-control input-sm' ng-model="search.tournament" placeholder='Enter tournament name'/>
+    <input type='search' class='form-control input-sm' ng-model="search.name" placeholder='Enter tournament name'/>
   </label>
   <label class='col-md-4'>
     Sort by: 
     <br />
     <select ng-model="predicate">
-      <option value='tournament'>Tournament Name</option>
+      <option value='name'>Tournament Name</option>
       <option value='year'>Year</option>
-      <option value='numPackets'>No. of Packets</option>
-      <option value='diff'>Difficulty</option>
+      <option value='difficulty'>Difficulty</option>
       <option value='power'>Powers</option>
     </select>
   </label>
@@ -21,17 +20,15 @@
     <tr>
       <th>Tournament Name</th>
       <th>Year</th>
-      <th>No. of Packets</th>
       <th>Difficulty</th>
       <th>Powers</th>
     </tr>
   </thead>
   <tbody>
     <tr ng-repeat="tourn in tournaments | filter:search | orderBy:predicate">
-      <td><a href="/viewtour/{{ tourn._id }}">{{ tourn.tournament }}</a></td>
+      <td><a href="/viewtour/{{ tourn.id }}">{{ tourn.name }}</a></td>
       <td>{{ tourn.year }}</td>
-      <td>{{ tourn.numPackets }}</td>
-      <td>{{ tourn.diff }}</td>
+      <td>{{ tourn.difficulty }}</td>
       <td>
         <input type='checkbox' ng-model="tourn.power" disabled/>
       </td>
