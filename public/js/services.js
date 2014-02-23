@@ -1,25 +1,14 @@
 angular.module('qbdb.services', ['ngResource']).
   factory('tournament', function($resource) {
-    var Tournament = $resource('/api/tournament');
+    var Tournament = $resource('/api/tournament/:id');
     return Tournament;
   }).
   factory('packet', function($resource) {
-    var Packet = $resource('/api/packet', null, {
-      'fromTournament': {
-        method: 'GET',
-        url: '/api/packet/tournament/:tid',
-        isArray: true
-      }
-    });
+    var Packet = $resource('/api/packet/:id');
     return Packet;
   }).
   factory('tossup', function($resource) {
     var Tossup = $resource('/api/tossup', null, {
-      'fromPacket': {
-        method: 'GET',
-        url: '/api/tossup/packet/:pid',
-        isArray: true
-      }, 
       'count': {
         method: 'GET',
         url: '/api/tossup/count',
@@ -34,11 +23,6 @@ angular.module('qbdb.services', ['ngResource']).
   }).
   factory('bonus', function($resource) {
     var Bonus = $resource('/api/bonus', null, {
-      'fromPacket': {
-        method: 'GET',
-        url: '/api/bonus/packet/:pid',
-        isArray: true
-      },
       'count': {
         method: 'GET',
         url: '/api/bonus/count'

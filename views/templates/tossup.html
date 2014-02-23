@@ -1,0 +1,28 @@
+<table cellspacing='0' class='table table-striped'>
+  <tr ng-repeat-start="tossup in tossups">
+    <td>{{tossup.SubjectId}}</td>
+    <td>
+      Change to
+      <!--
+      <select ng-model="tossup.subject" ng-change="tossup.$save()">
+        <optgroup label="{{subj.header}}" ng-repeat="subj in subjects">
+          <option ng-repeat="s in subj.list">{{s}}</option>
+        </optgroup>
+      </select>
+      -->
+      <input type='number' ng-model="tossup.SubjectId"/>
+    </td>
+    <td>
+      <label>
+        Reported: 
+        <input type="checkbox" class="btn btn-primary" ng-model='tossup.flagged' ng-change='tossup.$save()' />
+      </label>
+    </td>
+  </tr>
+  <tr ng-repeat-end>
+    <td colspan="3">
+      <p ng-bind-html="tossup.question"></p>
+      <p ng-bind-html="tossup.answer | answer"></p>
+    </td>
+  </tr>
+</table>

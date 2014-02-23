@@ -10,16 +10,27 @@ exports.partial = function(req, res) {
   res.sendfile(path.join(views, 'partials', name));
 }
 
+exports.template = function(req, res) {
+  var name = req.params.name;
+  res.sendfile(path.join(views, 'templates', name));
+}
+exports.allModels = function() {
+  for(var i=0;i<arguments.length;i++) {
+    var route = arguments[i];
+    route.list.auth(function(req, res, context) {
+      context.criteria = req.query || {};
+      context.continue();
+    });
+  }
+}
 exports.tournamentRoutes = function(tournaments) {
-
 }
 
 exports.packetRoutes = function(packets) {
-  packets.list.start(function(req, res, context) {
-    context.criteria = req.query;
-    context.continue();
-  });
-  packets.list.data(function(req, res, context) {
-    context.continue();
-  });
+}
+
+exports.tossupRoutes = function(tossups) {
+}
+
+exports.bonusRoutes = function(bonuses) {
 }

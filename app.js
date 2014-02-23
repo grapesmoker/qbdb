@@ -24,7 +24,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-//routes
+//sequelize routes
 var tournaments = rest.resource({
   model: db.Tournament,
   endpoints: ['/api/tournament', '/api/tournament/:id']
@@ -33,10 +33,24 @@ var packets = rest.resource({
   model: db.Packet,
   endpoints: ['/api/packet', '/api/packet/:id']
 });
+var tossups = rest.resource({
+  model: db.Tossup,
+  endpoints: ['/api/tossup', '/api/tossup/:id']
+});
+var bonuses = rest.resource({
+  model: db.Bonus,
+  endpoints: ['/api/bonus', '/api/bonus/:id']
+});
+
+//routes
 app.get('/', routes.index);
 app.get('/partials/:name', routes.partial);
+app.get('/templates/:name', routes.template);
+routes.allModels(tournaments, packets, tossups, bonuses);
 routes.tournamentRoutes(tournaments);
 routes.packetRoutes(packets);
+routes.tossupRoutes(tossups);
+routes.bonusRoutes(bonuses);
 app.get('*', routes.index);
 
 db.sequelize.sync().complete(function(err) {

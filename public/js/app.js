@@ -1,4 +1,4 @@
-var qbdb = angular.module('qbdb', ['ngRoute', 'ngSanitize', 'ui.bootstrap', 'qbdb.controllers', 'qbdb.services', 'qbdb.filters']);
+var qbdb = angular.module('qbdb', ['ngRoute', 'ngSanitize', 'ui.bootstrap', 'qbdb.controllers', 'qbdb.services', 'qbdb.directives', 'qbdb.filters']);
 
 qbdb.config(function($routeProvider, $locationProvider, $sceProvider) {
   $routeProvider

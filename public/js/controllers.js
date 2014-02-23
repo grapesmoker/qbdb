@@ -82,12 +82,13 @@ controller('allTournamentsCtrl', function($scope, tournament) {
 }).
 controller('viewTournamentCtrl', function($scope, $routeParams, tournament, packet) {
   $scope.tournament = tournament.get({id: $routeParams.tid});
-  $scope.packets = packet.fromTournament({tid: $routeParams.tid});
+  $scope.packets = packet.query({TournamentId: $routeParams.tid});
 }).
-controller('viewQuestionsCtrl', function($scope, $routeParams, packet, tossup, bonus) {
+controller('viewQuestionsCtrl', function($scope, $routeParams, tournament, packet, tossup, bonus) {
   $scope.packet = packet.get({id: $routeParams.pid});
-  $scope.tossups = tossup.fromPacket({pid: $routeParams.pid});
-  $scope.bonuses = bonus.fromPacket({pid: $routeParams.pid});
+  $scope.packet.$promise.then(function(res) { $scope.tournament = tournament.get({id: res.TournamentId }) });
+  $scope.tossups = tossup.query({PacketId: $routeParams.pid});
+  $scope.bonuses = bonus.query({PacketId: $routeParams.pid});
   $scope.subjects = subjects;
 }).
 controller('uncategorizedCtrl', function($scope, tossup, bonus) {

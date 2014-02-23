@@ -1,7 +1,10 @@
 angular.module('qbdb.directives', []).
-directive('tossup', function() {
+directive('tossupTable', function() {
   return {
-    restrict: 'E',
-    templateUrl: 'templates/tossup.html'
+    restrict: 'EA',
+    scope: {
+      tossups: '='
+    },
+    templateUrl: '/templates/tossup.html'
   }
 });
