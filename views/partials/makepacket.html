@@ -4,65 +4,11 @@
       ACF Tossups
     </h3>
   </div>
-  <table class="table table-striped">
-    <tr ng-repeat-start="tossup in tossups">
-      <td>{{tossup.subject}}</td>
-      <td>
-        Change to
-        <select ng-model="tossup.subject" ng-change="tossup.$save()">
-          <optgroup label="{{subj.header}}" ng-repeat="subj in subjects">
-             <option ng-repeat="s in subj.list">{{s}}</option>
-          </optgroup>
-        </select>
-      </td>
-      <td>
-        <label>
-          Reported: 
-          <input type="checkbox" class="btn btn-primary" ng-model='tossup.flagged'
-          ng-change='tossup.$save()' />
-        </label>
-      </td>
-    </tr>
-    <tr ng-repeat-end>
-      <td colspan="3">
-        <p ng-bind-html="tossup.question">
-        </p>
-        <p ng-bind-html="tossup.answer | answer">
-          ANSWER: 
-        </p>
-      </td>
-    </tr>
-  </table>
+  <table class='table table-striped' tossup-table tossups="tossups"></table>
   <div class="jumbotron">
     <h3>
       ACF Bonuses
     </h3>
   </div>
-  <table class="table table-striped">
-    <tr ng-repeat-start="bonus in bonuses">
-      <td>{{bonus.subject}}</td>
-      <td>
-        Change to
-        <select ng-model="bonus.subject" ng-change="bonus.$save()">
-          <optgroup label="{{subj.header}}" ng-repeat="subj in subjects">
-             <option ng-repeat="s in subj.list">{{s}}</option>
-          </optgroup>
-        </select>
-      </td>
-      <td>
-        Reported: 
-        <input type="checkbox" ng-model='bonus.flagged' ng-change='bonus.$save()'/>
-      </td>
-    </tr>
-    <tr ng-repeat-end>
-      <td colspan="3">
-        <p ng-bind-html="bonus.leadin">
-        </p>
-        <p ng-repeat-start="part in bonus.part">
-        [{{bonus.value[$index]}}] <span ng-bind-html="part"></span>
-        </p>
-        <p ng-repeat-end ng-bind-html="bonus.answer[$index] | answer"> </p>
-      </td>
-    </tr>
-  </table>
+  <table class='table table-striped' bonus-table bonuses="bonuses"></table>
 <div>

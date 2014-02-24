@@ -1,5 +1,7 @@
 var path = require('path')
   , views = path.join(__dirname, '..', 'views')
+  , tossup = require('./tossup')
+  , bonus = require('./bonus');
 
 exports.index = function(req, res) {
   res.sendfile(path.join(views, 'index.html'));
@@ -23,14 +25,18 @@ exports.allModels = function() {
     });
   }
 }
-exports.tournamentRoutes = function(tournaments) {
+
+exports.tournamentRoutes = function(app) {
+
+}
+exports.packetRoutes = function(app) {
+
 }
 
-exports.packetRoutes = function(packets) {
+exports.tossupRoutes = function(app, tossups) {
+  app.get('/api/makePacket/tossup', tossup.makePacket);
 }
 
-exports.tossupRoutes = function(tossups) {
-}
-
-exports.bonusRoutes = function(bonuses) {
+exports.bonusRoutes = function(app, bonuses) {
+  app.get('/api/makePacket/bonus', bonus.makePacket);
 }

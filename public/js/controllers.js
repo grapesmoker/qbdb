@@ -1,70 +1,3 @@
-var subjects = [
-  {
-    header: 'Undefined',
-    list: ['Undefined']
-  }, {
-    header: 'History',
-    list: [
-      'American History',
-    'European History',
-    'World History',
-    'Ancient History',
-    'Mixed History'
-      ] 
-  }, {
-    header: 'Literature',
-    list: [
-      'American Literature',
-    'British Literature',
-    'European Literature',
-    'World Literature',
-    'Ancient Literature',
-    'Mixed Literature'
-      ] 
-  }, {
-    header: 'Science',
-    list: [
-      'Biology',
-    'Chemistry',
-    'Physics',
-    'Mathematics',
-    'Astronomy',
-    'Earth Science',
-    'Computer Science',
-    'Other Science'
-      ]
-  }, {
-    header: 'RMP',
-    list: [
-      'Religion',
-    'Mythology',
-    'Philosophy'
-      ] 
-  }, {
-    header: 'Fine Arts',
-    list: [
-      'Classical Music',
-    'Opera',
-    'Other Music',
-    'Paintings',
-    'Sculpture',
-    'Other Art'
-      ]
-  }, {
-    header: 'Other',
-    list: [
-      'Anthropology',
-    'Economics',
-    'Psychology',
-    'Other Social Science',
-    'Geography',
-    'Miscellaneous',
-    'Current Events',
-    'TRASH'
-      ]
-  }
-];
-
 angular.module('qbdb.controllers', ['ngSanitize', 'qbdb.services']).
 controller('allTournamentsCtrl', function($scope, tournament) {
   $scope.tournaments = tournament.query();
@@ -79,10 +12,10 @@ controller('viewQuestionsCtrl', function($scope, $routeParams, tournament, packe
   $scope.packet.$promise.then(function(res) { $scope.tournament = tournament.get({id: res.TournamentId }) });
   $scope.tossups = tossup.query({PacketId: $routeParams.pid});
   $scope.bonuses = bonus.query({PacketId: $routeParams.pid});
-  $scope.subjects = subjects;
 }).
 controller('makepacketCtrl', function($scope, tossup, bonus) {
-  $scope.distribution = {
+  $scope.q = {};
+  $scope.q.distribution = {
     'American History': 1,
     'European History': 2,
     'World History': 1,
@@ -111,7 +44,6 @@ controller('makepacketCtrl', function($scope, tossup, bonus) {
     'Geography': 1,
     'TRASH': 1,
   }
-  $scope.tossups = tossup.makePacket($scope.distribution);
-  $scope.bonuses = bonus.makePacket($scope.distribution);
-  $scope.subjects = subjects;
+  $scope.tossups = tossup.makePacket($scope.q);
+  $scope.bonuses = bonus.makePacket($scope.q);
 });

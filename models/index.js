@@ -29,4 +29,5 @@ models.forEach(function(model) {
   m.Bonus.belongsTo(m.Subject);
 })(module.exports);
 
+module.exports.Sequelize = Sequelize;
 module.exports.sequelize = sequelize;

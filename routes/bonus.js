@@ -1,6 +1,6 @@
 var _ = require('lodash');
 var db = require('../models')
-  , Tossup = db.Tossup
+  , Bonus = db.Bonus
   , Subject = db.Subject
   , Packet = db.Packet
   , Tournament = db.Tournament;
@@ -17,7 +17,7 @@ exports.makePacket = function(req, res) {
   if(typeof distribution === "string") distribution = JSON.parse(distribution);
   Object.keys(distribution).forEach(function(subj) {
     var count = distribution[subj];
-    chainer.add(Tossup.findAll({
+    chainer.add(Bonus.findAll({
       where: {
         'Subject.subject': subj
       },

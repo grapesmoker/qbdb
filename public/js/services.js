@@ -13,7 +13,7 @@ factory('tossup', function($resource) {
   var Tossup = $resource('/api/tossup/:id', {id: '@id'}, {
     'makePacket': {
       method: 'GET',
-      url: '/api/tossup/makePacket',
+      url: '/api/makePacket/tossup',
       isArray: true
     }
   });
@@ -24,9 +24,10 @@ factory('bonus', function($resource) {
   var Bonus = $resource('/api/bonus/:id', null, {
     'makePacket': {
       method: 'GET',
-      url: '/api/bonus/makePacket',
+      url: '/api/makePacket/bonus',
       isArray: true
     }
   });
   return Bonus;
 });
+

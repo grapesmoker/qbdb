@@ -1,26 +1,20 @@
 <table cellspacing='0' class='table table-striped'>
   <tr ng-repeat-start="tossup in tossups">
-    <td>{{tossup.SubjectId}}</td>
-    <td>
-      Change to
-      <!--
-      <select ng-model="tossup.subject" ng-change="tossup.update()">
-        <optgroup label="{{subj.header}}" ng-repeat="subj in subjects">
-          <option ng-repeat="s in subj.list">{{s}}</option>
-        </optgroup>
-      </select>
-      -->
-      <input type='number' ng-model="tossup.SubjectId"/>
-    </td>
+    <td ng-show="tossup.subject">{{tossup.subject.subject}}</td>
     <td>
       <label>
         Reported: 
         <input type="checkbox" class="btn btn-primary" ng-model='tossup.flagged' ng-change='tossup.$save()' />
       </label>
     </td>
+    <span ng-show="tossup.packet">
+      <td>{{tossup.packet.name}}</td>
+      <td>{{tossup.packet.tournament.name}}</td>
+      <td>{{tossup.packet.tournament.year}}</td>
+    </span>
   </tr>
   <tr ng-repeat-end>
-    <td colspan="3">
+    <td colspan="5">
       <p ng-bind-html="tossup.question"></p>
       <p ng-bind-html="tossup.answer | answer"></p>
     </td>

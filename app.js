@@ -41,16 +41,21 @@ var bonuses = rest.resource({
   model: db.Bonus,
   endpoints: ['/api/bonus', '/api/bonus/:id']
 });
+var subjects = rest.resource({
+  model: db.Subject,
+  endpoints: ['/api/subjects', null],
+  actions: ['list']
+});
 
 //routes
 app.get('/', routes.index);
 app.get('/partials/:name', routes.partial);
 app.get('/templates/:name', routes.template);
 routes.allModels(tournaments, packets, tossups, bonuses);
-routes.tournamentRoutes(tournaments);
-routes.packetRoutes(packets);
-routes.tossupRoutes(tossups);
-routes.bonusRoutes(bonuses);
+routes.tournamentRoutes(app, tournaments);
+routes.packetRoutes(app, packets);
+routes.tossupRoutes(app, tossups);
+routes.bonusRoutes(app, bonuses);
 app.get('*', routes.index);
 
 db.sequelize.sync().complete(function(err) {

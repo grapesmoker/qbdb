@@ -1,32 +1,26 @@
 <table cellspacing='0' class='table table-striped'>
   <tr ng-repeat-start="bonus in bonuses">
-    <td>{{bonus.SubjectId}}</td>
-    <td>
-      Change to
-      <!--
-      <select ng-model="bonus.subject" ng-change="bonus.update()">
-        <optgroup label="{{subj.header}}" ng-repeat="subj in subjects">
-          <option ng-repeat="s in subj.list">{{s}}</option>
-        </optgroup>
-      </select>
-      -->
-      <input type='number' ng-model="bonus.SubjectId"/>
-    </td>
+    <td ng-show="bonus.subject">{{bonus.subject.subject}}</td>
     <td>
       <label>
         Reported: 
         <input type="checkbox" class="btn btn-primary" ng-model='bonus.flagged' ng-change='bonus.$save()' />
       </label>
     </td>
+    <span ng-show="bonus.packet">
+      <td>{{bonus.packet.name}}</td>
+      <td>{{bonus.packet.tournament.name}}</td>
+      <td>{{bonus.packet.tournament.year}}</td>
+    </span>
   </tr>
   <tr ng-repeat-end>
-    <td colspan="3">
+    <td colspan="5">
       <p ng-bind-html="bonus.leadin"></p>
-      <p ng-bind-html="bonus.part1"></p>
+      <p ng-bind-html="bonus.part1 | value"></p>
       <p ng-bind-html="bonus.answer1 | answer"></p>
-      <p ng-bind-html="bonus.part2"></p>
+      <p ng-bind-html="bonus.part2 | value"></p>
       <p ng-bind-html="bonus.answer2 | answer"></p>
-      <p ng-bind-html="bonus.part3"></p>
+      <p ng-bind-html="bonus.part3 | value"></p>
       <p ng-bind-html="bonus.answer3 | answer"></p>
     </td>
   </tr>
