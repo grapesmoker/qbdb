@@ -1,0 +1,18 @@
+<div>
+  <form>
+    <input ng-model="q" />
+    <input type='button' class='btn btn-primary' value='Search!' ng-click="search()" />
+  </form>
+  <div class="jumbotron">
+    <h3>
+      Search Tossups
+    </h3>
+  </div>
+  <table class='table table-striped' tossup-table tossups="tossups"></table>
+  <div class="jumbotron">
+    <h3>
+      Search Bonuses
+    </h3>
+  </div>
+  <table class='table table-striped' bonus-table bonuses="bonuses"></table>
+<div>
