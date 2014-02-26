@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize')
   //, config = require('config').Database
-  , config = {name: 'qbdb', user: 'arnav', pass: 'psql', options: {host: 'localhost', port: 5432, dialect: 'postgres', omitNull: true, logging: false}}
+  , config = {name: 'qbdb', user: 'arnav', pass: 'psql', options: {host: 'localhost', port: 5432, dialect: 'postgres', omitNull: true}}
   , path = require('path')
   , postgres  = require('sequelize-postgres').postgres
   , sequelize = new Sequelize(config.name, config.user, config.pass, config.options);

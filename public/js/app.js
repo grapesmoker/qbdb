@@ -28,6 +28,10 @@ qbdb.config(function($routeProvider, $locationProvider, $sceProvider) {
       templateUrl: 'partials/viewquestions.html',
       controller: 'viewQuestionsCtrl'
     })
+    .when('/search', {
+      templateUrl: 'partials/search.html',
+      controller: 'searchCtrl'
+    })
     .when('/makepacket', {
       templateUrl: 'partials/makepacket.html',
       controller: 'makepacketCtrl'

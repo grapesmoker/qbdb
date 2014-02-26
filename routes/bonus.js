@@ -19,7 +19,8 @@ exports.makePacket = function(req, res) {
     var count = distribution[subj];
     chainer.add(Bonus.findAll({
       where: {
-        'Subject.subject': subj
+        'Subject.subject': subj,
+        'flagged': false
       },
       include: [
         {model: Subject},

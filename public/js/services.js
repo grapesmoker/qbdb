@@ -11,9 +11,14 @@ factory('packet', function($resource) {
 
 factory('tossup', function($resource) {
   var Tossup = $resource('/api/tossup/:id', {id: '@id'}, {
-    'makePacket': {
+    'makePacket' : {
       method: 'GET',
       url: '/api/makePacket/tossup',
+      isArray: true
+    },
+    'search' : {
+      method: 'GET',
+      url: '/api/search/tossup',
       isArray: true
     }
   });

@@ -19,7 +19,8 @@ exports.makePacket = function(req, res) {
     var count = distribution[subj];
     chainer.add(Tossup.findAll({
       where: {
-        'Subject.subject': subj
+        'Subject.subject': subj,
+        'flagged': false
       },
       include: [
         {model: Subject},
@@ -33,5 +34,13 @@ exports.makePacket = function(req, res) {
     res.send(_.shuffle(_.flatten(results)));
   }).error(function(err) {
     res.send(500, err);
+  });
+}
+
+exports.search = function(req, res) {
+  Tossup.search(req.query.q).success(function(tups) {
+    res.send(tups);
+  }).error(function(err) {
+    res.send(500, err);    
   });
 }

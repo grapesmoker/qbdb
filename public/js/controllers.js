@@ -13,6 +13,13 @@ controller('viewQuestionsCtrl', function($scope, $routeParams, tournament, packe
   $scope.tossups = tossup.query({PacketId: $routeParams.pid});
   $scope.bonuses = bonus.query({PacketId: $routeParams.pid});
 }).
+controller('searchCtrl', function($scope, tossup, bonus) {
+  $scope.tossups = {};
+  $scope.search = function() {
+    console.log($scope.q);
+    $scope.tossups = tossup.search({q: $scope.q});
+  }
+}).
 controller('makepacketCtrl', function($scope, tossup, bonus) {
   $scope.q = {};
   $scope.q.distribution = {

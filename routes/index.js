@@ -35,6 +35,7 @@ exports.packetRoutes = function(app) {
 
 exports.tossupRoutes = function(app, tossups) {
   app.get('/api/makePacket/tossup', tossup.makePacket);
+  app.get('/api/search/tossup', tossup.search);
 }
 
 exports.bonusRoutes = function(app, bonuses) {
