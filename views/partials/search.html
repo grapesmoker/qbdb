@@ -1,6 +1,8 @@
 <div>
-  <form>
-    <input ng-model="q" />
+  <form class="form-inline" role="form">
+    <div class='form-group'>
+      <input class="form-control" ng-model="q" />
+    </div>
     <input type='button' class='btn btn-primary' value='Search!' ng-click="search()" />
   </form>
   <div class="jumbotron">
@@ -14,5 +16,6 @@
       Search Bonuses
     </h3>
   </div>
+  <p>Bonuses will go here when they're searchable</p>
   <table class='table table-striped' bonus-table bonuses="bonuses"></table>
 <div>
