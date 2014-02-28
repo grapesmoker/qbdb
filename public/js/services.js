@@ -31,6 +31,11 @@ factory('bonus', function($resource) {
       method: 'GET',
       url: '/api/makePacket/bonus',
       isArray: true
+    },
+    'search' : {
+      method: 'GET',
+      url: '/api/search/bonus',
+      isArray: true
     }
   });
   return Bonus;

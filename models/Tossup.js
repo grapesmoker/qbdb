@@ -48,7 +48,7 @@ module.exports = function(sequelize, DataTypes) {
         query = sequelize.getQueryInterface().escape(query);
 
         return sequelize
-          .query('SELECT * FROM "'+Tossup.tableName+'" WHERE "' + Tossup.getSearchVector() + '" @@ plainto_tsquery(\'english\', ' + query + ') AND flagged=false LIMIT 50', Tossup, {});
+          .query('SELECT * FROM "'+Tossup.tableName+'" WHERE "' + Tossup.getSearchVector() + '" @@ plainto_tsquery(\'english\', ' + query + ') AND flagged=false LIMIT 50', Tossup); 
       }
     }
   });

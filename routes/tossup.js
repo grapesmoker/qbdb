@@ -5,7 +5,27 @@ var db = require('../models')
   , Packet = db.Packet
   , Tournament = db.Tournament;
 
-exports.count = function(req, res) {
+exports.read = function(req, res) {
+  var id = req.params.id;
+  Tossup.find(id).success(function(tossup) {
+    res.json(tossup);
+  }).error(function(err) {
+    res.send(500, err);
+  });
+}
+
+exports.list = function(req, res) {
+  var limit = req.query.limit || 100;
+  var offset = req.query.offset || 0;
+  delete req.query.limit;
+  delete req.query.offset;
+  
+  var query = req.query || {};
+  Tossup.findAll({include: [{model: Subject}, {model: Packet, include: [Tournament]}], where: query, offset: offset, limit: limit}).success(function(tossups) {
+    res.json(tossups);
+  }).error(function(err) {
+    res.send(500, err);
+  });
 }
 
 exports.makePacket = function(req, res) {
@@ -38,8 +58,20 @@ exports.makePacket = function(req, res) {
 }
 
 exports.search = function(req, res) {
+  var chainer = new db.Sequelize.Utils.QueryChainer;
   Tossup.search(req.query.q).success(function(tups) {
-    res.send(tups);
+    tups.forEach(function(e) {
+      chainer.add(e.getSubject().success(function(d) {
+        e.dataValues.subject = d;
+        return e;
+        e.getPacket().success(function(p) {
+        });
+      }));
+    });
+
+    chainer.run().success(function() {
+      res.send(tups);
+    });
   }).error(function(err) {
     res.send(500, err);    
   });

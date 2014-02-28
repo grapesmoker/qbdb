@@ -8,5 +8,24 @@ module.exports = function(sequelize, DataTypes) {
     part3: DataTypes.TEXT,
     answer3: DataTypes.TEXT,
     flagged: DataTypes.BOOLEAN
+  }, {
+    classMethods: {
+      getSearchVector: function() {
+        return 'BonusText';
+      },
+       search: function(query) {
+         if(sequelize.options.dialect !== 'postgres') {
+           console.log('Search is only implemented on POSTGRES database');
+           return;
+         }
+         var Bonus = this;
+
+         query = sequelize.getQueryInterface().escape(query);
+
+         return sequelize
+           .query('SELECT * FROM "'+Bonus.tableName+'" WHERE "' + Bonus.getSearchVector() + '" @@ plainto_tsquery(\'english\', ' + query + ') AND flagged=false LIMIT 50', Bonus); 
+
+       }
+    }
   });
 }

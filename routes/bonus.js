@@ -5,7 +5,27 @@ var db = require('../models')
   , Packet = db.Packet
   , Tournament = db.Tournament;
 
-exports.count = function(req, res) {
+exports.read = function(req, res) {
+  var id = req.params.id;
+  Bonus.find(id).success(function(bonus) {
+    res.json(bonus);
+  }).error(function(err) {
+    res.send(500, err);
+  });
+}
+
+exports.list = function(req, res) {
+  var limit = req.query.limit || 100;
+  var offset = req.query.offset || 0;
+  delete req.query.limit;
+  delete req.query.offset;
+  
+  var query = req.query || {};
+  Bonus.findAll({include: [{model: Subject}, {model: Packet, include: [Tournament]}], where: query, offset: offset, limit: limit}).success(function(bonuses) {
+    res.json(bonuses);
+  }).error(function(err) {
+    res.send(500, err);
+  });
 }
 
 exports.makePacket = function(req, res) {
@@ -34,5 +54,25 @@ exports.makePacket = function(req, res) {
     res.send(_.shuffle(_.flatten(results)));
   }).error(function(err) {
     res.send(500, err);
+  });
+}
+
+exports.search = function(req, res) {
+  var chainer = new db.Sequelize.Utils.QueryChainer;
+  Bonus.search(req.query.q).success(function(buns) {
+    buns.forEach(function(e) {
+      chainer.add(e.getSubject().success(function(d) {
+        e.dataValues.subject = d;
+        return e;
+        e.getPacket().success(function(p) {
+        });
+      }));
+    });
+
+    chainer.run().success(function() {
+      res.send(buns);
+    });
+  }).error(function(err) {
+    res.send(500, err);    
   });
 }

@@ -15,9 +15,10 @@ controller('viewQuestionsCtrl', function($scope, $routeParams, tournament, packe
 }).
 controller('searchCtrl', function($scope, tossup, bonus) {
   $scope.tossups = {};
+  $scope.bonuses = {};
   $scope.search = function() {
-    console.log($scope.q);
     $scope.tossups = tossup.search({q: $scope.q});
+    $scope.bonuses = bonus.search({q: $scope.q});
   }
 }).
 controller('makepacketCtrl', function($scope, tossup, bonus) {

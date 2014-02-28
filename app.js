@@ -27,19 +27,13 @@ if ('development' == app.get('env')) {
 //sequelize routes
 var tournaments = rest.resource({
   model: db.Tournament,
-  endpoints: ['/api/tournament', '/api/tournament/:id']
+  endpoints: ['/api/tournament', '/api/tournament/:id'],
+  actions: ['read', 'list']
 });
 var packets = rest.resource({
   model: db.Packet,
-  endpoints: ['/api/packet', '/api/packet/:id']
-});
-var tossups = rest.resource({
-  model: db.Tossup,
-  endpoints: ['/api/tossup', '/api/tossup/:id']
-});
-var bonuses = rest.resource({
-  model: db.Bonus,
-  endpoints: ['/api/bonus', '/api/bonus/:id']
+  endpoints: ['/api/packet', '/api/packet/:id'],
+  actions: ['read', 'list']
 });
 var subjects = rest.resource({
   model: db.Subject,
@@ -51,11 +45,11 @@ var subjects = rest.resource({
 app.get('/', routes.index);
 app.get('/partials/:name', routes.partial);
 app.get('/templates/:name', routes.template);
-routes.allModels(tournaments, packets, tossups, bonuses);
+routes.allModels(tournaments, packets); 
 routes.tournamentRoutes(app, tournaments);
 routes.packetRoutes(app, packets);
-routes.tossupRoutes(app, tossups);
-routes.bonusRoutes(app, bonuses);
+routes.tossupRoutes(app);
+routes.bonusRoutes(app);
 app.get('*', routes.index);
 
 db.sequelize.sync().complete(function(err) {
