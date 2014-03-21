@@ -1,13 +1,13 @@
 <table cellspacing='0' class='table table-striped'>
   <tr ng-repeat-start="tossup in tossups">
-    <td ng-show="tossup.subject">{{tossup.subject.subject}}</td>
+    <td>{{tossup.subject.subject}}</td>
     <td>
       <label>
         Reported: 
         <input type="checkbox" class="btn btn-primary" ng-model='tossup.flagged' ng-change='tossup.$save()' />
       </label>
     </td>
-    <span ng-show="tossup.packet">
+    <span>
       <td>{{tossup.packet.name}}</td>
       <td>{{tossup.packet.tournament.name}}</td>
       <td>{{tossup.packet.tournament.year}}</td>

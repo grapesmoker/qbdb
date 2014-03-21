@@ -58,20 +58,8 @@ exports.makePacket = function(req, res) {
 }
 
 exports.search = function(req, res) {
-  var chainer = new db.Sequelize.Utils.QueryChainer;
   Bonus.search(req.query.q).success(function(buns) {
-    buns.forEach(function(e) {
-      chainer.add(e.getSubject().success(function(d) {
-        e.dataValues.subject = d;
-        return e;
-        e.getPacket().success(function(p) {
-        });
-      }));
-    });
-
-    chainer.run().success(function() {
-      res.send(buns);
-    });
+    res.send(buns);
   }).error(function(err) {
     res.send(500, err);    
   });

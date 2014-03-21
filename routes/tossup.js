@@ -58,20 +58,8 @@ exports.makePacket = function(req, res) {
 }
 
 exports.search = function(req, res) {
-  var chainer = new db.Sequelize.Utils.QueryChainer;
   Tossup.search(req.query.q).success(function(tups) {
-    tups.forEach(function(e) {
-      chainer.add(e.getSubject().success(function(d) {
-        e.dataValues.subject = d;
-        return e;
-        e.getPacket().success(function(p) {
-        });
-      }));
-    });
-
-    chainer.run().success(function() {
-      res.send(tups);
-    });
+    res.send(tups);
   }).error(function(err) {
     res.send(500, err);    
   });

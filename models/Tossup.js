@@ -48,7 +48,7 @@ module.exports = function(sequelize, DataTypes) {
         query = sequelize.getQueryInterface().escape(query);
 
         return sequelize
-          .query('SELECT * FROM "'+Tossup.tableName+'" WHERE "' + Tossup.getSearchVector() + '" @@ plainto_tsquery(\'english\', ' + query + ') AND flagged=false LIMIT 50', Tossup); 
+          .query('SELECT "Tossups".*, "Subject"."id" AS "subject.id", "Subject"."subject" AS "subject.subject", "Subject"."createdAt" AS "subject.createdAt", "Subject"."updatedAt" AS "subject.updatedAt", "Packet"."id" AS "packet.id", "Packet"."name" AS "packet.name", "Packet"."packet_mongo" AS "packet.packet_mongo", "Packet"."createdAt" AS "packet.createdAt", "Packet"."updatedAt" AS "packet.updatedAt", "Packet"."TournamentId" AS "packet.TournamentId", "packet.Tournament"."id" AS "packet.tournament.id", "packet.Tournament"."name" AS "packet.tournament.name", "packet.Tournament"."difficulty" AS "packet.tournament.difficulty", "packet.Tournament"."power" AS "packet.tournament.power", "packet.Tournament"."year" AS "packet.tournament.year", "packet.Tournament"."tournament_mongo" AS "packet.tournament.tournament_mongo", "packet.Tournament"."createdAt" AS "packet.tournament.createdAt", "packet.Tournament"."updatedAt" AS "packet.tournament.updatedAt" FROM "Tossups" LEFT OUTER JOIN "Subjects" AS "Subject" ON "Subject"."id" = "Tossups"."SubjectId" LEFT OUTER JOIN "Packets" AS "Packet" ON "Packet"."id" = "Tossups"."PacketId" LEFT OUTER JOIN "Tournaments" AS "packet.Tournament" ON "packet.Tournament"."id" = "Packet"."TournamentId" WHERE "' + Tossup.getSearchVector() +'" @@ plainto_tsquery(\'english\', ' + query + ') AND flagged=false LIMIT 50', null, {raw: true}); 
       }
     }
   });
