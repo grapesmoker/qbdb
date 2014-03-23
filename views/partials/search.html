@@ -10,11 +10,14 @@
       Search Tossups
     </h3>
   </div>
-  <table class='table table-striped' tossup-table tossups="tossups"></table>
+  <p ng-show="tossups.length === 0"> No Tossups Found </p>
+  <table class='table table-striped' tossup-table tossups="tossups">
+  </table>
   <div class="jumbotron">
     <h3>
       Search Bonuses
     </h3>
   </div>
+  <p ng-show="bonuses.length === 0"> No Bonuses Found </p>
   <table class='table table-striped' bonus-table bonuses="bonuses"></table>
 <div>
