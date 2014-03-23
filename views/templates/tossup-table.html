@@ -7,14 +7,13 @@
         <input type="checkbox" disabled class="btn btn-primary" ng-model='tossup.flagged' />
       </label>
     </td>
-    <span>
-      <td>{{tossup.packet.name}}</td>
-      <td>{{tossup.packet.tournament.name}}</td>
-      <td>{{tossup.packet.tournament.year}}</td>
-    </span>
+    <td>{{ tossup.packet.name }}</td>
+    <td>{{ tossup.packet.tournament.name }}</td>
+    <td>{{ tossup.packet.tournament.year }}</td>
+    <td>{{ tossup.rank | number:2 }}</td>
   </tr>
   <tr ng-repeat-end>
-    <td colspan="5">
+    <td colspan="6">
       <p ng-bind-html="tossup.question"></p>
       <p ng-bind-html="tossup.answer | answer"></p>
     </td>
