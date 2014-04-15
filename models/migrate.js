@@ -117,7 +117,7 @@ var importBonus = function(file, cb) {
   chain.run().success(function(out) { cb(null, out); }).error(function(err) { cb(err, null); });
 }
 
-  /*
+/*
 async.series([
   function(cb) { Tournament.sync({force: true}).success(function() {cb(null, 0)}); },
   function(cb) { importTournament(cb); },
@@ -140,6 +140,6 @@ async.series([
     }
   }
 ]);
-  */
+*/
 
-linkPacketTournament(function(){});
+//linkPacketTournament(function(){});
