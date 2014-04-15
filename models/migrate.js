@@ -143,3 +143,5 @@ async.series([
 */
 
 //linkPacketTournament(function(){});
+//
+Bonus.addFullTextIndex();

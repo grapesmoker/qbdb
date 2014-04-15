@@ -1,20 +1,19 @@
 <table cellspacing='0' class='table table-striped'>
   <tr ng-repeat-start="bonus in bonuses">
-    <td ng-show="bonus.subject">{{bonus.subject.subject}}</td>
+    <td>{{bonus.subject.subject}}</td>
     <td>
       <label>
         Reported: 
-        <input type="checkbox" class="btn btn-primary" ng-model='bonus.flagged' disabled/>
+        <input type="checkbox" disabled class="btn btn-primary" ng-model='bonus.flagged'/>
       </label>
     </td>
-    <span ng-show="bonus.packet">
-      <td>{{bonus.packet.name}}</td>
-      <td>{{bonus.packet.tournament.name}}</td>
-      <td>{{bonus.packet.tournament.year}}</td>
-    </span>
+    <td>{{bonus.packet.name}}</td>
+    <td>{{bonus.packet.tournament.name}}</td>
+    <td>{{bonus.packet.tournament.year}}</td>
+    <td>{{ bonus.rank | number:2 }}</td>
   </tr>
   <tr ng-repeat-end>
-    <td colspan="5">
+    <td colspan="6">
       <p ng-bind-html="bonus.leadin"></p>
       <p ng-bind-html="bonus.part1 | value"></p>
       <p ng-bind-html="bonus.answer1 | answer"></p>
