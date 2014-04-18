@@ -1,9 +1,9 @@
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Tournament', {
-    name : DataTypes.TEXT,
-    difficulty: DataTypes.INTEGER,
-    power: DataTypes.BOOLEAN,
-    year: DataTypes.INTEGER,
-    tournament_mongo: DataTypes.STRING,
-  });
-}
+var Bookshelf = require('bookshelf').DB;
+
+exports.model = Bookshelf.Model.extend({
+  tableName: "Tournaments"
+});
+
+exports.collection = Bookshelf.Collection.extend({
+  model: exports.model
+});
