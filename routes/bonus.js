@@ -1,66 +1,27 @@
-var _ = require('lodash');
-var db = require('../models')
-  , Bonus = db.Bonus
-  , Subject = db.Subject
-  , Packet = db.Packet
-  , Tournament = db.Tournament;
-
-exports.read = function(req, res) {
-  var id = req.params.id;
-  Bonus.find(id).success(function(bonus) {
-    res.json(bonus);
-  }).error(function(err) {
-    res.send(500, err);
-  });
-}
+var Bonus = require('../models/Bonus').model
+  , Bonuses = require('../models/Bonus').collection;
 
 exports.list = function(req, res) {
-  var limit = req.query.limit || 100;
-  var offset = req.query.offset || 0;
-  delete req.query.limit;
-  delete req.query.offset;
-  
-  var query = req.query || {};
-  Bonus.findAll({include: [{model: Subject}, {model: Packet, include: [Tournament]}], where: query, offset: offset, limit: limit}).success(function(bonuses) {
-    res.json(bonuses);
-  }).error(function(err) {
-    res.send(500, err);
+  new Bonuses().query('where', req.query).fetch({
+    withRelated: ['subject', 'packet', 'packet.tournament']
+  }).then(function(collection) {
+    res.send(collection.toJSON());
+  }, function(err) {
+    res.send(500, {error: err});  
   });
 }
 
-exports.makePacket = function(req, res) {
-  if(!req.query) res.send(400, new Error("No query!"));
-  if(!req.query.distribution) res.send(400, new Error("No distribution!"));
-  var distribution = req.query.distribution;
-  delete req.query.distribution;
-  var chainer = new db.Sequelize.Utils.QueryChainer;
-  if(typeof distribution === "string") distribution = JSON.parse(distribution);
-  Object.keys(distribution).forEach(function(subj) {
-    var count = distribution[subj];
-    chainer.add(Bonus.findAll({
-      where: {
-        'Subject.subject': subj,
-        'flagged': false
-      },
-      include: [
-        {model: Subject},
-        {model: Packet, include: [ Tournament ]}
-      ],
-      order: db.sequelize.fn('RANDOM'),
-      limit: count
-    }));
-  });
-  chainer.run().success(function(results) {
-    res.send(_.shuffle(_.flatten(results)));
-  }).error(function(err) {
-    res.send(500, err);
+exports.get = function(req, res) {
+  var bid = req.params.id;
+  new Bonus({
+    id: bid
+  }).fetch().then(function(bon) {
+    if(tup == undefined)
+      res.send(404, {error: 'Bonus not found'});
+    else
+      res.send(200, bon);
+  }, function(err) {
+    res.send(500, {error: err});  
   });
 }
 
-exports.search = function(req, res) {
-  Bonus.search(req.query.q).success(function(buns) {
-    res.send(buns);
-  }).error(function(err) {
-    res.send(500, err);    
-  });
-}

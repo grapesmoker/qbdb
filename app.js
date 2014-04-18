@@ -8,7 +8,7 @@ var express = require('express')
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 8080);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
 app.use(express.favicon());
@@ -31,7 +31,8 @@ var routes = require('./routes')
   , tournament  = require('./routes/tournament')
   , packet  = require('./routes/packet')
   , subject  = require('./routes/subject')
-  , tossup  = require('./routes/tossup');
+  , tossup  = require('./routes/tossup')
+  , bonus  = require('./routes/bonus');
 
 //main routes
 app.get('/', routes.index);
@@ -52,7 +53,10 @@ app.get('/api/subject', subject.list);
 //tossup
 app.get('/api/tossup', tossup.list);
 app.get('/api/tossup/:id', tossup.get);
+
 //bonus
+app.get('/api/bonus', bonus.list);
+app.get('/api/bonus/:id', bonus.get);
 
 //everything else
 app.get('*', routes.index);
