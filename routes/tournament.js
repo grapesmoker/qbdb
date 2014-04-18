@@ -14,7 +14,6 @@ exports.get = function(req, res) {
   new Tournament({
     id: tid
   }).fetch().then(function(tourn) {
-    console.log(tourn);
     if(tourn == undefined)
       res.send(404, {error: 'Tournament not found'});
     else
