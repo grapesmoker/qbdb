@@ -1,10 +1,26 @@
 <div>
+  <form class='inline-form' name='makePacketForm' ng-submit='showPacket()'>
+    <fieldset>
+      <legend>Packet Specs:</legend>
+      <span class='form-group'>
+        <label>Powers: <input type='checkbox' ng-model='q.power'/></label>
+      </span>
+      <span class='form-group'>
+        <label class='control-label'>Min. Diff: <input class='form-control' type='number' min='1' max='9' ng-model='q.minDiff'/></label>
+      </span>
+      <span class='form-group'>
+        <label>Max. Diff: <input class='form-control' type='number' min='1' max='9' ng-model='q.maxDiff'/></label>
+      </span>
+      <input class='btn btn-primary' type='submit' name='' value='Generate Packet' />
+    </fieldset>
+  </form>
   <div class="jumbotron">
     <h3>
       ACF Tossups
     </h3>
   </div>
   <table class='table table-striped' tossup-table tossups="tossups"></table>
+
   <div class="jumbotron">
     <h3>
       ACF Bonuses

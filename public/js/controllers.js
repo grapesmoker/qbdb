@@ -22,36 +22,42 @@ controller('searchCtrl', function($scope, tossup, bonus) {
   }
 }).
 controller('makepacketCtrl', function($scope, tossup, bonus) {
-  $scope.q = {};
-  $scope.q.distribution = {
-    'American History': 1,
-    'European History': 2,
-    'World History': 1,
-    'Ancient History': 1,
+  $scope.q = {
+    minDiff: 1,
+    maxDiff: 9,
+    power: false,
+    distribution: {
+      'American History': 1,
+      'European History': 2,
+      'World History': 1,
+      'Ancient History': 1,
 
-    'American Literature': 1,
-    'British Literature': 1,
-    'European Literature': 2,
-    'World Literature': 1,
+      'American Literature': 1,
+      'British Literature': 1,
+      'European Literature': 2,
+      'World Literature': 1,
 
-    'Biology': 1,
-    'Chemistry': 1,
-    'Physics': 1,
-    'Mathematics': 1,
-    'Astronomy': 1,
+      'Biology': 1,
+      'Chemistry': 1,
+      'Physics': 1,
+      'Mathematics': 1,
+      'Astronomy': 1,
 
-    'Religion': 1,
-    'Mythology': 1,
-    'Philosophy': 1,
+      'Religion': 1,
+      'Mythology': 1,
+      'Philosophy': 1,
 
-    'Classical Music': 1,
-    'Paintings': 1,
-    'Other Art': 1,
+      'Classical Music': 1,
+      'Paintings': 1,
+      'Other Art': 1,
 
-    'Psychology': 1,
-    'Geography': 1,
-    'TRASH': 1,
+      'Psychology': 1,
+      'Geography': 1,
+      'TRASH': 1,
+    }
   }
-  $scope.tossups = tossup.makePacket($scope.q);
-  $scope.bonuses = bonus.makePacket($scope.q);
+  $scope.showPacket = function() {
+    $scope.tossups = tossup.makePacket($scope.q);
+    $scope.bonuses = bonus.makePacket($scope.q);
+  }
 });
