@@ -29,7 +29,8 @@ Bookshelf.DB = Bookshelf.initialize(config.Database);
 //ROUTES
 var routes = require('./routes')
   , tournament  = require('./routes/tournament')
-  , packet  = require('./routes/packet');
+  , packet  = require('./routes/packet')
+  , subject  = require('./routes/subject');
 
 //main routes
 app.get('/', routes.index);
@@ -45,6 +46,7 @@ app.get('/api/packet', packet.list);
 app.get('/api/packet/:id', packet.get);
 
 //subject
+app.get('/api/subject', subject.list);
 
 //tossup
 
