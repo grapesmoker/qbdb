@@ -5,5 +5,5 @@ module.exports = function(sequelize, DataTypes) {
     power: DataTypes.BOOLEAN,
     year: DataTypes.INTEGER,
     tournament_mongo: DataTypes.STRING,
-  });
+  }, {timestamps: false});
 }
