@@ -30,7 +30,8 @@ Bookshelf.DB = Bookshelf.initialize(config.Database);
 var routes = require('./routes')
   , tournament  = require('./routes/tournament')
   , packet  = require('./routes/packet')
-  , subject  = require('./routes/subject');
+  , subject  = require('./routes/subject')
+  , tossup  = require('./routes/tossup');
 
 //main routes
 app.get('/', routes.index);
@@ -49,7 +50,8 @@ app.get('/api/packet/:id', packet.get);
 app.get('/api/subject', subject.list);
 
 //tossup
-
+app.get('/api/tossup', tossup.list);
+app.get('/api/tossup/:id', tossup.get);
 //bonus
 
 //everything else

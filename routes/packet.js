@@ -2,7 +2,7 @@ var Packet = require('../models/Packet').model
   , Packets = require('../models/Packet').collection;
 
 exports.list = function(req, res) {
-  new Packets().query().where(req.query).select().then(function(collection) {
+  new Packets().query('where', req.query).fetch().then(function(collection) {
     res.send(collection);
   }, function(err) {
     res.send(500, {error: err});  
