@@ -52,10 +52,12 @@ app.get('/api/subject', subject.list);
 
 //tossup
 app.get('/api/tossup', tossup.list);
+app.get('/api/tossup/makePacket', tossup.makePacket);
 app.get('/api/tossup/:id', tossup.get);
 
 //bonus
 app.get('/api/bonus', bonus.list);
+app.get('/api/bonus/makePacket', bonus.makePacket);
 app.get('/api/bonus/:id', bonus.get);
 
 //everything else
