@@ -58,3 +58,23 @@ exports.makePacket = function(req, res) {
     res.send(200, _.shuffle(tups));
   });
 }
+
+exports.search = function(req, res) {
+  var query = req.query.search;
+  new Bonuses().query(function(qb) {
+    qb.column(knex.raw('ts_rank(ARRAY[0, 0, 0.8, 0.4], "Bonus"."BonusText", query) AS rank, "Bonus".*'))
+    .from(knex.raw("plainto_tsquery('english', '"+query+"') query, \"Bonus\""))
+    .where(knex.raw('"Bonus"."BonusText" @@ query'))
+    .where('flagged', '=', 'false')
+    .orderBy('rank', 'desc')
+    .limit(50)
+    .debug()
+  }).fetch({
+    withRelated: ['subject', 'packet', 'packet.tournament']
+  }).then(function(tups) {
+    res.send(200, tups);
+  }, function(err) {
+    console.log(err);
+    res.send(500, err);  
+  });
+}

@@ -8,11 +8,11 @@ var express = require('express')
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 8080);
+app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
 app.use(express.favicon());
-app.use(express.logger('dev'));
+app.use(express.logger());
 app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -53,11 +53,13 @@ app.get('/api/subject', subject.list);
 //tossup
 app.get('/api/tossup', tossup.list);
 app.get('/api/tossup/makePacket', tossup.makePacket);
+app.get('/api/tossup/search', tossup.search);
 app.get('/api/tossup/:id', tossup.get);
 
 //bonus
 app.get('/api/bonus', bonus.list);
 app.get('/api/bonus/makePacket', bonus.makePacket);
+app.get('/api/bonus/search', bonus.search);
 app.get('/api/bonus/:id', bonus.get);
 
 //everything else
