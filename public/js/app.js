@@ -1,6 +1,6 @@
 var qbdb = angular.module('qbdb', ['ngRoute', 'ngSanitize', 'ui.bootstrap', 'qbdb.controllers', 'qbdb.services', 'qbdb.directives', 'qbdb.filters'])
 .run(function($rootScope, $http) {
-  $http.get('/api/subjects').success(function(data) {
+  $http.get('/api/subject').success(function(data) {
     $rootScope.subjects = {};
     data.forEach(function(e) {
       $rootScope.subjects[e.id] = e.subject;

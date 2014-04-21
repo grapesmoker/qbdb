@@ -1,5 +1,9 @@
-module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('Subject', {
-    subject: DataTypes.STRING
-  });
-}
+var Bookshelf = require('bookshelf').DB;
+
+exports.model = Bookshelf.Model.extend({
+  tableName: "Subjects",
+});
+
+exports.collection = Bookshelf.Collection.extend({
+  model: exports.model
+});

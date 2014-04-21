@@ -14,11 +14,12 @@ controller('viewQuestionsCtrl', function($scope, $routeParams, tournament, packe
   $scope.bonuses = bonus.query({PacketId: $routeParams.pid});
 }).
 controller('searchCtrl', function($scope, tossup, bonus) {
+  $scope.q = {}
   $scope.tossups = [];
   $scope.bonuses = [];
   $scope.search = function() {
-    $scope.tossups = tossup.search({q: $scope.q});
-    $scope.bonuses = bonus.search({q: $scope.q});
+    $scope.tossups = tossup.search($scope.q);
+    $scope.bonuses = bonus.search($scope.q);
   }
 }).
 controller('makepacketCtrl', function($scope, tossup, bonus) {
@@ -26,35 +27,34 @@ controller('makepacketCtrl', function($scope, tossup, bonus) {
     minDiff: 1,
     maxDiff: 9,
     power: false,
-    distribution: {
-      'American History': 1,
-      'European History': 2,
-      'World History': 1,
-      'Ancient History': 1,
+    distribution: [
+      [ 'American History' ],
+      [ 'European History' ],
+      [ 'World History' ],
+      [ 'Ancient History', 'Mixed History' ],
 
-      'American Literature': 1,
-      'British Literature': 1,
-      'European Literature': 2,
-      'World Literature': 1,
+      [ 'American Literature' ],
+      [ 'British Literature' ],
+      [ 'European Literature', 'Ancient Literature' ],
+      [ 'World Literature', 'Mixed Literature' ],
 
-      'Biology': 1,
-      'Chemistry': 1,
-      'Physics': 1,
-      'Mathematics': 1,
-      'Astronomy': 1,
+      [ 'Biology' ],
+      [ 'Chemistry' ],
+      [ 'Physics' ],
+      [ 'Astronomy', 'Earth Science', 'Mathematics', 'Computer Science', 'Other Science' ],
 
-      'Religion': 1,
-      'Mythology': 1,
-      'Philosophy': 1,
+      [ 'Religion' ],
+      [ 'Mythology' ],
+      [ 'Philosophy' ],
 
-      'Classical Music': 1,
-      'Paintings': 1,
-      'Other Art': 1,
+      [ 'Classical Music', 'Opera' ],
+      [ 'Paintings', 'Sculpture' ],
+      [ 'Other Music', 'Other Art' ],
 
-      'Psychology': 1,
-      'Geography': 1,
-      'TRASH': 1,
-    }
+      [ 'Anthropology', 'Economics', 'Psychology', 'Other Social Science' ], //social science
+      [ 'Geography' ],
+      [ 'Miscellaneous', 'TRASH' ]
+    ]
   }
   $scope.showPacket = function() {
     $scope.tossups = tossup.makePacket($scope.q);

@@ -1,66 +1,85 @@
-var _ = require('lodash');
-var db = require('../models')
-  , Tossup = db.Tossup
-  , Subject = db.Subject
-  , Packet = db.Packet
-  , Tournament = db.Tournament;
+var Promise = require('bluebird')
+  , _ = require('lodash')
+  , knex = require('bookshelf').DB.knex;
+var Tossup = require('../models/Tossup').model
+  , Tossups = require('../models/Tossup').collection;
 
-exports.read = function(req, res) {
-  var id = req.params.id;
-  Tossup.find(id).success(function(tossup) {
-    res.json(tossup);
-  }).error(function(err) {
-    res.send(500, err);
+exports.list = function(req, res) {
+  new Tossups().query('where', req.query).fetch({
+    withRelated: ['subject', 'packet', 'packet.tournament']
+  }).then(function(collection) {
+    res.send(collection.toJSON());
+  }, function(err) {
+    res.send(500, {error: err});  
   });
 }
 
-exports.list = function(req, res) {
-  var limit = req.query.limit || 100;
-  var offset = req.query.offset || 0;
-  delete req.query.limit;
-  delete req.query.offset;
-  
-  var query = req.query || {};
-  Tossup.findAll({include: [{model: Subject}, {model: Packet, include: [Tournament]}], where: query, offset: offset, limit: limit}).success(function(tossups) {
-    res.json(tossups);
-  }).error(function(err) {
-    res.send(500, err);
+exports.get = function(req, res) {
+  var tid = req.params.id;
+  new Tossup({
+    id: tid
+  }).fetch().then(function(tup) {
+    if(tup == undefined)
+      res.send(404, {error: 'Tossup not found'});
+    else
+      res.send(200, tup);
+  }, function(err) {
+    res.send(500, {error: err});  
   });
 }
 
 exports.makePacket = function(req, res) {
-  if(!req.query) res.send(400, new Error("No query!"));
-  if(!req.query.distribution) res.send(400, new Error("No distribution!"));
-  var distribution = req.query.distribution;
-  delete req.query.distribution;
-  var chainer = new db.Sequelize.Utils.QueryChainer;
-  if(typeof distribution === "string") distribution = JSON.parse(distribution);
-  Object.keys(distribution).forEach(function(subj) {
-    var count = distribution[subj];
-    chainer.add(Tossup.findAll({
-      where: {
-        'Subject.subject': subj,
-        'flagged': false
-      },
-      include: [
-        {model: Subject},
-        {model: Packet, include: [ Tournament ]}
-      ],
-      order: db.sequelize.fn('RANDOM'),
-      limit: count
+  var minDiff = req.query.minDiff || 1
+    , maxDiff = req.query.maxDiff || 9
+    , power = JSON.parse(req.query.power) || false
+    , distribution = req.query.distribution.map(JSON.parse);
+  var promises = [];
+  distribution.forEach(function(subjects) {
+    var ind = Math.floor(Math.random() * subjects.length);
+    var subj = subjects[ind];
+    promises.push(new Tossups().query(function(qb) {
+      qb.join('Subjects', 'Tossups.SubjectId', '=', 'Subjects.id')
+      .join('Packets', 'Tossups.PacketId', '=', 'Packets.id')
+      .join('Tournaments', 'Packets.TournamentId', '=', 'Tournaments.id')
+      .whereBetween('Tournaments.difficulty', [minDiff, maxDiff])
+      .andWhere('Subjects.subject', '=', subj)
+      .orderBy(knex.raw('random()'))
+      .limit(1);
+
+      if(power) {
+        qb.andWhere('power', '=', 't');
+      }
+
+    }).fetchOne({
+      withRelated: ['subject', 'packet', 'packet.tournament']
+    }).then(function(tup) {
+      return tup;
     }));
   });
-  chainer.run().success(function(results) {
-    res.send(_.shuffle(_.flatten(results)));
-  }).error(function(err) {
-    res.send(500, err);
+
+  Promise.map(promises, function(tup) {
+    return tup;
+  }).then(function(tups) {
+    res.send(200, _.shuffle(tups));
   });
 }
 
 exports.search = function(req, res) {
-  Tossup.search(req.query.q).success(function(tups) {
-    res.send(tups);
-  }).error(function(err) {
-    res.send(500, err);    
+  var query = req.query.search;
+  new Tossups().query(function(qb) {
+    qb.column(knex.raw('ts_rank(ARRAY[0, 0, 0.8, 0.4], "Tossups"."TossupText", query) AS rank, "Tossups".*'))
+    .from(knex.raw("plainto_tsquery('english', '"+query+"') query, \"Tossups\""))
+    .where(knex.raw('"Tossups"."TossupText" @@ query'))
+    .where('flagged', '=', 'false')
+    .orderBy('rank', 'desc')
+    .limit(50)
+    .debug()
+  }).fetch({
+    withRelated: ['subject', 'packet', 'packet.tournament']
+  }).then(function(tups) {
+    res.send(200, tups);
+  }, function(err) {
+    console.log(err);
+    res.send(500, err);  
   });
 }
